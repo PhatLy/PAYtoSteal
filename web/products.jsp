@@ -12,25 +12,6 @@
         <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
         <title>Item Page</title>
         
-        <script>
-            function validate(form){
-                
-                var isValid = true;
-          
-                //Check if quantity is set
-                if((form.item1.value + form.item2.value + form.item3.value )==0){
-                    //show error
-                    document.getElementById("errNumber").innerHTML = "Please set quantity for the product you'd like to add to the cart.";
-                    isValid = false;
-                } 
-                
-                if(isValid)
-                    form.submit(); 
-               
-            }
-            
-        </script>
-        
     </head>
     <body>
 
@@ -48,11 +29,8 @@
                 <input type="text" name="password" id="password">
               </form></td>
             </tr>
-          </table>
-          <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+        </table>
 
-        <!-- end .header --></div>
-      <div class="content">
         <%@ page import="product.*"%>
         <% 
             int itemListLimit = Integer.parseInt(request.getParameter("txtNumber"));
@@ -84,11 +62,11 @@
                             //to display the original #of products the user requested to view.
                             msg = "You requested " + itemListLimit + " items to be listed. </br>"
                                      + "Sorry, we only have "+ items.length +" this time. Check us back soon!";
+                            itemListLimit = items.length;
                                 
                         }                       
                         
                         
-                        itemListLimit = items.length;
                         for(int i = 0; i< itemListLimit; i++)
                         {
                             %>
@@ -106,13 +84,8 @@
                 <span id="errNumber" class="error">
                     <%= msg%>
                 </span>
-                                  
-            <br><input type='button' value="Add to Cart" onclick="validate(this.form)"/>
+                <br><input type="submit" value="Add to Cart"/>
         </form>
-        <!-- end .content --></div>
-      <div class="footer">
-        <p>&nbsp;</p>
-        <!-- end .footer --></div>
-      <!-- end .container --></div>
     </body>
 </html>
+

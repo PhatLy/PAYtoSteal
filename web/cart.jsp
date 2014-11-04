@@ -33,7 +33,7 @@
 
            <!-- end .header --></div>
         <div class="content">
-            <% 
+        <% 
             String firstItem = request.getParameter("item1");
             firstItem = firstItem == null ? "0" : firstItem;
             
@@ -44,13 +44,18 @@
             thirdItem = thirdItem == null ? "0" : thirdItem;
         %>
         <h1>Your Cart</h1>
+        
+        <%if (firstItem.equals("0") && secondItem.equals("0") && secondItem.equals("0")) { %>
+            <p>Your cart is empty</p>
+       <%}%>
+        
         <form action="checkout.jsp" method="post">
             <table border="1" align="center" cellpadding="20" cellspacing="0">
                 <tbody>
                     <tr>
                         <% if (!(firstItem.equals("0"))) { %>
                             <td><image src="images/iphone.jpg" width="75" height= "75"></td>
-                            <td class="label">Textbook</td>
+                            <td class="label">Apple iPhone</td>
                             <td class='label'>Price: $<%= request.getParameter("price1")%> <input type='hidden' value='<%= request.getParameter("price1")%>' name='price1'/></td>
                             <td class="label">Quantity:<input type="text" value=<%= firstItem %> name="item1" autocomplete="off"/></td>
                         <%}
