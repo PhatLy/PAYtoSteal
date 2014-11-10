@@ -39,7 +39,7 @@
         </script>
     </head>
     <body>
-        
+        <jsp:include page="WEB-INF/jspf/timerScript.jsp" /><%--move this to each item in product --%>
         <div class="container">
         <table width="100" border="0" align="right">
             <tr>
@@ -79,9 +79,7 @@
             </table>
             
         </form>
-            <!-- end .content --></div>
-            <div class="footer"> copyright@ Phat Ashley Yonas            <!-- end .footer --> (try replacing with snippet)      </div>
-    <!-- end .container --></div>
+            <%@include file="/WEB-INF/jspf/footer.jspf" %><!-- end .container --></div>
 
     </body>
 </html>
