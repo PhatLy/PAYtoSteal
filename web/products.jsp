@@ -15,7 +15,7 @@
     </head>
     <body>
 
-    <div class="container">
+            <div class="container">
         <table width="100" border="0" align="right">
             <tr>
               <td>Account</td>
@@ -29,8 +29,9 @@
                 <input type="text" name="password" id="password">
               </form></td>
             </tr>
-        </table>
-
+          </table>
+          <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+        <div class="content">
         <%@ page import="product.*"%>
         <% 
             int itemListLimit = Integer.parseInt(request.getParameter("txtNumber"));
@@ -86,6 +87,10 @@
                 </span>
                 <br><input type="submit" value="Add to Cart"/>
         </form>
+        <!-- end .content --></div>
+        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+        <!-- end .container --></div>                                
     </body>
+    
 </html>
 

@@ -58,7 +58,7 @@
           <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
         
  
-            <div class="content">
+          <div class="content">
             <h1>Welcome to our store!</h1>
        
             <p>Please type the number of products you'd like to view.</p>
@@ -79,7 +79,9 @@
             </table>
             
         </form>
-            <%@include file="/WEB-INF/jspf/footer.jspf" %><!-- end .container --></div>
+            <!-- end .content --></div>
+            <%@include file="/WEB-INF/jspf/footer.jspf" %>
+            <!-- end .container --></div>
 
     </body>
 </html>
