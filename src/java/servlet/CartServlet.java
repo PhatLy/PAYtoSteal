@@ -53,10 +53,6 @@ public class CartServlet extends HttpServlet {
        
         HttpSession session = request.getSession();
         Cart c = (Cart) session.getAttribute("cart");  
-        
-        session.setAttribute("name1", request.getParameter(items[0].getItemName()));
-        session.setAttribute("name2", request.getParameter(items[1].getItemName()));
-        session.setAttribute("name3", request.getParameter(items[2].getItemName()));
 
         if (c == null) {
             c = new Cart();

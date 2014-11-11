@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +15,6 @@
     </head>
     
     <body>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         
         <div class="container">
             <table width="100" border="0" align="right">
@@ -37,9 +37,6 @@
         <div class="content">
 
         <h1>Your Cart</h1>
-        <h2>${sessionScope.name1}</h2>
-        <h2>${sessionScope.name2}</h2>
-        <h2>${sessionScope.name3}</h2>
         
         <form action="CheckoutServlet" method="post">
             <table border="1" align="center" cellpadding="20" cellspacing="0">
@@ -66,6 +63,5 @@
         <%@include file="/WEB-INF/jspf/footer.jspf" %>
         <!-- end .container --></div>
 
-        
     </body>
 </html>
