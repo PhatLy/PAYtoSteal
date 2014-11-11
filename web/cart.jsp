@@ -63,9 +63,7 @@
             </tr>
         </form>
         <!-- end .content --></div>
-        <div class="footer">
-            <p>&nbsp;</p>
-        <!-- end .footer --></div>
+        <%@include file="/WEB-INF/jspf/footer.jspf" %>
         <!-- end .container --></div>
 
         

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,9 +15,7 @@
         
     </head>
     <body>
-        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-    <div class="container">
+        <div class="container">
         <table width="100" border="0" align="right">
             <tr>
               <td>Account</td>
@@ -31,6 +30,9 @@
               </form></td>
             </tr>
         </table>
+
+        <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+        <div class="content">
         
         <h1>Pick an item to add to your cart</h1>
              
@@ -53,6 +55,10 @@
         <span id="errNumber" class="error">
             ${msg}
         </span>
+        
+        <!-- end .content --></div>
+        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+        <!-- end .container --></div>
     </body>
 </html>
 

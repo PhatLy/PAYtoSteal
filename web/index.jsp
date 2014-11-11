@@ -39,9 +39,9 @@
         </script>
     </head>
     <body>
-        
+        <jsp:include page="WEB-INF/jspf/timerScript.jsp" /><%--move this to each item in product --%>
         <div class="container">
-        <table width="100" border="0" align="right">
+        <table width="150" border="0" align="right">
             <tr>
               <td>Account</td>
               <td><form name="form1" method="post" action="">
@@ -54,11 +54,18 @@
                 <input type="text" name="password" id="password">
               </form></td>
             </tr>
-          </table>
+        </table>
+        <table width="150" border="0" align="right">
+            <tr>
+                <td>
+                    <a href="createAccount.jsp"> Create Account</a>
+                </td>
+            </tr>
+        </table>
           <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
         
  
-            <div class="content">
+          <div class="content">
             <h1>Welcome to our store!</h1>
        
             <p>Please type the number of products you'd like to view.</p>
@@ -80,8 +87,8 @@
             
         </form>
             <!-- end .content --></div>
-            <div class="footer"> copyright@ Phat Ashley Yonas            <!-- end .footer --> (try replacing with snippet)      </div>
-    <!-- end .container --></div>
+            <%@include file="/WEB-INF/jspf/footer.jspf" %>
+            <!-- end .container --></div>
 
     </body>
 </html>
