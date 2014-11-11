@@ -14,6 +14,8 @@
     </head>
     
     <body>
+        <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        
         <div class="container">
             <table width="100" border="0" align="right">
             <tr>
@@ -33,68 +35,31 @@
 
            <!-- end .header --></div>
         <div class="content">
-        <% 
-            String firstItem = request.getParameter("item1");
-            firstItem = firstItem == null ? "0" : firstItem;
-            
-            String secondItem = request.getParameter("item2");
-            secondItem = secondItem == null ? "0" : secondItem;
-            
-            String thirdItem = request.getParameter("item3");
-            thirdItem = thirdItem == null ? "0" : thirdItem;
-        %>
+
         <h1>Your Cart</h1>
+        <h2>${sessionScope.name1}</h2>
+        <h2>${sessionScope.name2}</h2>
+        <h2>${sessionScope.name3}</h2>
         
-        <%if (firstItem.equals("0") && secondItem.equals("0") && secondItem.equals("0")) { %>
-            <p>Your cart is empty</p>
-       <%}%>
-        
-        <form action="checkout.jsp" method="post">
+        <form action="CheckoutServlet" method="post">
             <table border="1" align="center" cellpadding="20" cellspacing="0">
                 <tbody>
+                    <c:forEach var="itm" items="${sessionScope.cart.items}">
                     <tr>
-                        <% if (!(firstItem.equals("0"))) { %>
-                            <td><image src="images/iphone.jpg" width="75" height= "75"></td>
-                            <td class="label">Apple iPhone</td>
-                            <td class='label'>Price: $<%= request.getParameter("price1")%> <input type='hidden' value='<%= request.getParameter("price1")%>' name='price1'/></td>
-                            <td class="label">Quantity:<input type="text" value=<%= firstItem %> name="item1" autocomplete="off"/></td>
-                        <%}
-                        else { %>
-                            <input type="hidden" value="0" name="item1"/>
-                            <input type="hidden" value="0" name="price1"/>
-                        <%}%>
+                        <td><image src=${itm.item.imgSrc} width="75" height="75"></td>
+                        <td>${itm.item.itemName}</td>
+                        <td>Price: $${itm.item.price}</td>
+                        <td>Quantity: ${itm.quantity}</td>
                     </tr>
-                    <tr>
-                        <% if (!(secondItem.equals("0"))) { %>
-                            <td><image src="images/textbook.jpg" width="75" height= "75"></td>
-                            <td class="label">Textbook</td>
-                            <td class='label'>Price: $<%= request.getParameter("price2")%> <input type='hidden' value='<%= request.getParameter("price2")%>' name='price2'/></td>
-                            <td class="label">Quantity:<input type="text" value=<%= secondItem %> name="item2" autocomplete="off"/></td>
-                        <%}
-                        else { %>
-                            <input type="hidden" value="0" name="item2"/>
-                            <input type="hidden" value="0" name="price2"/>
-                        <%}%>
-                    </tr>
-                    <tr>
-                        <% if (!(thirdItem.equals("0"))) { %>
-                            <td><image src="images/fan.jpg" width="75" height="75"></td>
-                            <td class="label">Desk Fan</td>
-                            <td class='label'>Price: $<%= request.getParameter("price3")%> <input type='hidden' value='<%= request.getParameter("price3")%>' name='price3'/></td>
-                            <td class="label">Quantity:<input type="text" value=<%= thirdItem %> name="item3" autocomplete="off"></td>
-                        <%}
-                        else { %>
-                            <input type="hidden" value="0" name="item3"/>
-                            <input type="hidden" value="0" name="price3"/>
-                        <%}%>
-                    </tr>
+                    </c:forEach>
                 </tbody>
             </table>
             <br><input type="submit" value="Checkout"/>
         </form>
-        <form action="index.jsp" method="post">
+        <form action="ProductsServlet" method="post">
             <tr>
-                <td><br><input type="button" value="Continue Shopping" onclick="form.submit()"/></td>
+                <input type="hidden" name="itemCount" value="${requestScope.itemCount}"/>
+                <td><br><input type="submit" value="Continue Shopping"/></td>
             </tr>
         </form>
         <!-- end .content --></div>

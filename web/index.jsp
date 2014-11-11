@@ -63,7 +63,7 @@
        
             <p>Please type the number of products you'd like to view.</p>
         
-            <form action='products.jsp' method="post">
+            <form action='ProductsServlet' method="post">
             
             <table border='0' align="center" cellpadding="2" cellspacing="2">
                 <tr>
