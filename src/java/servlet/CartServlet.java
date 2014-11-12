@@ -35,22 +35,23 @@ public class CartServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Item itemName = null;
+        
+        //get product name
+        String itemName = request.getParameter("itemName");
+        
+        
+        Item item = null;
         
         ProdMgmt pm = new ProdMgmt();
         Item[] items = pm.getItems();
-        request.setAttribute("itemCount", request.getParameter("itemCount"));
         
-        if (request.getParameter(items[0].getItemName()) != null) {
-            itemName = items[0];
-        }
-        else if (request.getParameter(items[1].getItemName()) != null) {
-            itemName = items[1];
-        }
-        else {
-            itemName = items[2];
-        }
        
+        //search for the product and set the item object
+        for (Item i : items) {
+            if(i.getItemName().equals(itemName))
+                item = i;
+        }
+        
         HttpSession session = request.getSession();
         Cart c = (Cart) session.getAttribute("cart");  
 
@@ -62,13 +63,13 @@ public class CartServlet extends HttpServlet {
         
         LineItem lItem = null;
         for (int i = 0; i < c.getSize(); i++) {
-            if (line.get(i).getItem().getItemName().equals(itemName.getItemName())) {
+            if (line.get(i).getItem().getItemName().equals(item.getItemName())) {
                 lItem = line.get(i);
             }
         }
         
         if (lItem == null) {
-            lItem = new LineItem(itemName, 0);
+            lItem = new LineItem(item, 0);
         }
             
         c.addItem(lItem);
