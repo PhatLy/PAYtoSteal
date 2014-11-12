@@ -48,7 +48,10 @@
                             <td width="75px">${item.itemName}</a></td>
                             <td width="75px">Price: $${item.price}</td>
                             <input type="hidden" name="${item.itemName}" value="${item.itemName}"/>
-                            <td width="75px"><a href="CartServlet?itemName=${item.itemName}">Add to cart</a></td>
+                            <td width="75px"><%--<a href="CartServlet?itemName=${item.itemName}">Add to cart</a>--%>
+                            <input type="button" value="Add to cart" 
+                                       onclick="location.href='CartServlet?itemName=${item.itemName}'; 
+                                           return false;"/></td>
                         </tr>
 
         </c:forEach>
