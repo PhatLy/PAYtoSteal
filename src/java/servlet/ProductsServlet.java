@@ -34,7 +34,7 @@ public class ProductsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int itemListLimit = request.getParameter("itemCount") == null ? Integer.parseInt(request.getParameter("txtNumber")) : Integer.parseInt(request.getParameter("itemCount"));
+        int itemListLimit = Integer.parseInt(request.getParameter("txtNumber"));
         
         ProdMgmt pm = new ProdMgmt();
         Item[] items = pm.getItems();
@@ -70,7 +70,6 @@ public class ProductsServlet extends HttpServlet {
             list.add(items[i]);
         }
         request.setAttribute("items", list);
-        request.setAttribute("itemCount", itemListLimit);
         
         String url = "/products.jsp";
         
