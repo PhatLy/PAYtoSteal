@@ -54,6 +54,14 @@ public class ProductsServlet extends HttpServlet {
                   + "Sorry, we only have "+ items.length +" this time. Check us back soon!";
             itemListLimit = items.length;
         }   
+        
+        //we'll need to remember the value of itemListLimit while the user is in active session
+        //the continue shopping button will use this session variable
+        //to take the user back to the products page with the 
+        //correct number of items listed.
+        HttpSession session = request.getSession();
+        session.setAttribute("itemListLimit", itemListLimit);
+        
         request.setAttribute("msg", msg);
         ArrayList<Item> list = new ArrayList<>();        
         
