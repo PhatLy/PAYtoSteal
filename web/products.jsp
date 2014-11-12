@@ -35,23 +35,29 @@
         <div class="content">
         
         <h1>Pick an item to add to your cart</h1>
-             
-        <c:forEach var="item" items="${requestScope.items}">
+        <%-- yonas: 1. moved form tag out of the for loop.
+                    2. replaced form submit with anchor link--%>
             <form action="CartServlet" method="post">
                 <table border="1" align="center" cellpadding="20" cellspacing="0">
-                    <tbody>
+                    <tbody>        
+                        
+        <c:forEach var="item" items="${requestScope.items}">
+
                         <tr>
                             <td width="75px"><image src="${item.imgSrc}" width="75" height="75"></td>
                             <td width="75px">${item.itemName}</a></td>
                             <td width="75px">Price: $${item.price}</td>
                             <input type="hidden" name="${item.itemName}" value="${item.itemName}"/>
                             <input type="hidden" name="itemCount" value="${requestScope.itemCount}"/>
-                            <td width="75px"><input type="submit" name="Add To Cart"/></td>
+                            <td width="75px"><a href="CartServlet?itemName=${item.itemName}">Add to cart</a></td>
                         </tr>
+
+        </c:forEach>
+
                     </tbody>
                 </table>
             </form>
-        </c:forEach>
+                        
         <span id="errNumber" class="error">
             ${msg}
         </span>
