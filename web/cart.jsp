@@ -53,9 +53,10 @@
             </table>
             <br><input type="submit" value="Checkout"/>
         </form>
+        
         <form action="ProductsServlet" method="post">
             <tr>
-                <input type="hidden" name="itemCount" value="${requestScope.itemCount}"/>
+                <input type="hidden" name="txtNumber" value="${sessionScope.itemListLimit}"/>
                 <td><br><input type="submit" value="Continue Shopping"/></td>
             </tr>
         </form>
