@@ -15,7 +15,7 @@
     </head>
     
     <body>
-        
+    <div class="background">
         <div class="container">
             <table width="100" border="0" align="right">
             <tr>
@@ -64,6 +64,6 @@
         
         <!-- end .container --></div>
         <%@include file="/WEB-INF/jspf/footer.jspf" %>
-
+    <!-- end background --></div>
     </body>
 </html>

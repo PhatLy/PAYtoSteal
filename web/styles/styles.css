@@ -9,19 +9,12 @@ and open the template in the editor.
 */
 
 .error{color: red; font-style: italic;};
-body {
-	width: 1200px;
-	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	margin: 10;
-	padding: 0;
-	color: #000000;
-	background-color: #603;
-	text-align: center;
+body{
+	
 	background-image: url(../images/b.jpg);
 	background-repeat: repeat;
-	border: thin solid #009;
 }
-
+.background{background-image: url(../images/b.jpg);}
 h1, h2, h3, h4, h5, h6, p {
 	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
 	padding-right: 0px;
@@ -49,7 +42,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 /* ~~ this fixed width container surrounds the other divs ~~ */
 .container {
 	width: 800px;
-	height: 1000px;
+	
 	background: #FFF;
 	margin-left: auto;
 	margin-right: auto;
@@ -65,6 +58,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 
 }
 .content {
+        height: 600px;
 	padding: 10px 0;
 	text-align: center;
 }
