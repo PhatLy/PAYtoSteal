@@ -56,13 +56,11 @@
                             <td class="label">Country</td>
                             <td>
                                 <select name="country">
-                                    <%
-                                        for(int i=0; i<countries.size(); i++){
-                                    %>
-                                    <option value="<%=countries.get(i)%>"><%=countries.get(i)%></option>
-                                    <%
-                                        }
-                                    %>
+                                    <option value="country"></option>
+                                    
+                                    <c:forEach items="${country.countries}" var="country">
+                                            <option>${country}</option>
+                                    </c:forEach>
                                 </select>
                             </td>
                         </tr>

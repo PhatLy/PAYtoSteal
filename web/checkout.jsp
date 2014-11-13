@@ -37,8 +37,9 @@
         
         <p>Your total is: $${requestScope.cost}</p>
         <!-- end .content --></div>
-        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+        
         <!-- end .container --></div>
+        <%@include file="/WEB-INF/jspf/footer.jspf" %>
 
         
     </body>

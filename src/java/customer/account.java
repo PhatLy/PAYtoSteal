@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package customer;
-
 /**
  *
  * @author Phat
@@ -12,12 +11,17 @@ package customer;
 public class account {
     String firstName;
     String lastName;
-    String password;
+    String country;
+    String email;
+    String username;
+    String password;    
+    
     //request.setAttribute("firstName", firstName);
     public account(String first, String last, String pw){
         firstName=first;
         lastName=last;
         password=pw;
+        
     }
     public String getFirst(){
         return firstName;

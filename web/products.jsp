@@ -32,6 +32,8 @@
         </table>
 
         <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+        <!-- end .header --></div> 
+        
         <div class="content">
         
         <h1>Pick an item to add to your cart</h1>
@@ -65,8 +67,9 @@
         </span>
         
         <!-- end .content --></div>
-        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+        
         <!-- end .container --></div>
+        <%@include file="/WEB-INF/jspf/footer.jspf" %>
     </body>
 </html>
 
