@@ -19,6 +19,7 @@
         </script>
     </head>
     <body>
+    <div class ="background">
         <div class="container">
         
           <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
@@ -26,59 +27,64 @@
  
           <div class="content">
             
-            <%@ page import="java.util.List, java.util.ArrayList" %>
-            <% 
-                List<String> countries = new ArrayList<String>();
-                countries.add("United States");
-                countries.add("Mexico");
-                countries.add("Canada");
-                countries.add("Russia");
-            %>
+            
         <h1>New Account</h1>
-        <%--<request.getSession().setAttribute("userName", UserMgmt.getUsers());
-        <c: forEach var="user" items="${requestScope.userAccounts}">
-        should be in .java file
-        </c:>
-        --%>
             <form action="accountVerify.jsp" method="post">
                 <table border="0" align="Center">
                     <tbody>
                         <tr>
-                            
-                            <td>First Name: ${param.firstName}</td>
-                            <td><input type="text" name="firstName"/></td>
+                            <td>
+                                <p>First Name</p>
+                            </td>
+                            <td>
+                                <p><input type="text" name="firstname"></p>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="label">Last Name</td>
-                            <td><input type="text" name="lastname"/></td>
+                            <td>
+                                <p>Last Name</p>
+                            </td>
+                            <td>
+                                <p><input type="text" name="lastname"></p>
+                            </td>
                         </tr>
                         <tr>
                             <td class="label">Country</td>
                             <td>
-                                <select name="country">
-                                    <option value="country"></option>
-                                    
-                                    <c:forEach items="${country.countries}" var="country">
-                                            <option>${country}</option>
-                                    </c:forEach>
-                                </select>
+                                United States
                             </td>
                         </tr>
                         <tr>
-                            <td class="label">Email</td>
-                            <td><input type="text" name="email"/></td>
+                            <td>
+                                <p>Email</p>
+                            </td>
+                            <td>
+                                <p><input type="text" name="email"></p>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="label">Username</td>
-                            <td><input type="text" name="username"/></td>
+                            <td>
+                                <p>Username</p>
+                            </td>
+                            <td>
+                                <p><input type="text" name="username"></p>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="label">Password</td>
-                            <td><input type="password" name="password1"/></td>
+                            <td>
+                                <p>Password</p>
+                            </td>
+                            <td>
+                                <p><input type="password" name="password1"></p>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="label">Password (Verify)</td>
-                            <td><input type="password" name="password2"/></td>
+                            <td>
+                                <p>Re-type Password</p>
+                            </td>
+                            <td>
+                                <p><input type="password" name="password2"></p>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -87,6 +93,6 @@
             <!-- end .content --></div>
             <%@include file="/WEB-INF/jspf/footer.jspf" %>
             <!-- end .container --></div>
-
+        </div><!--end background-->
     </body>
 </html>

@@ -13,51 +13,44 @@
         <title>Create Account</title>
     </head>
     <body>
+        <div class="background">
         <div class="container">
           <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
           <div class="content">
-            
+        
         <h1>Verify Account</h1>
             <form action="index.jsp" method="post">
                 <table border="0" align="Center">
                     <tbody>
                         <tr>
                             <td class="label">First Name</td>
-                            <td>${user.firstName}</td>
+                            <td>${param.firstname}</td>
                         </tr>
                         <tr>
                             <td class="label">Last Name</td>
-                            <td><input type="text" name="lastname"/></td>
+                            <td>${param.lastname}</td>
                         </tr>
                         <tr>
                             <td class="label">Country</td>
                             <td>
-                                <p>insert country here</p>
+                                <p>United States</p>
                             </td>
                         </tr>
                         <tr>
                             <td class="label">Email</td>
-                            <td><input type="text" name="email"/></td>
+                            <td>${param.email}</td>
                         </tr>
                         <tr>
                             <td class="label">Username</td>
-                            <td><input type="text" name="username"/></td>
-                        </tr>
-                        <tr>
-                            <td class="label">Password</td>
-                            <td><input type="password" name="password1"/></td>
-                        </tr>
-                        <tr>
-                            <td class="label">Password (Verify)</td>
-                            <td><input type="password" name="password2"/></td>
+                            <td>${param.username}</td>
                         </tr>
                     </tbody>
                 </table>
-                <input type="button" value="Submit" onclick="validate(this.form)"/>
+                <input type="submit" value="OK" />
             </form>
             <!-- end .content --></div>
             <%@include file="/WEB-INF/jspf/footer.jspf" %>
             <!-- end .container --></div>
-
+        </div><!--end .background-->
     </body>
 </html>
