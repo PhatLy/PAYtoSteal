@@ -13,8 +13,55 @@
         <title>Create Account</title>
         <script>
             function validate(form){
-                //alert("Javascript enabled!!");
-                form.submit();
+                var isValid = true;
+          
+                //Check if input is empty
+                if(form.firstname.value === ""){
+                    //show error
+                    document.getElementById("errFname").innerHTML = "First Name can not be empty.";
+                    isValid = false;
+                }
+                else
+                    document.getElementById("errFname").innerHTML = "";
+                if(form.lastname.value === ""){
+                    //show error
+                    document.getElementById("errLname").innerHTML = "Last Name can not be empty.";
+                    isValid = false;
+                } 
+                else
+                    document.getElementById("errLname").innerHTML = "";
+                if(form.username.value === ""){
+                    //show error
+                    document.getElementById("errUname").innerHTML = "Username can not be empty.";
+                    isValid = false;
+                } 
+                else
+                    document.getElementById("errUname").innerHTML = "";
+                if(form.email.value === ""){
+                    //show error
+                    document.getElementById("errEmail").innerHTML = "Email can not be empty.";
+                    isValid = false;
+                } 
+                else
+                    document.getElementById("errEmail").innerHTML = "";
+                if(form.password1.value === ""){
+                    //show error
+                    document.getElementById("errPassfield").innerHTML = "Password can not be empty.";
+                    isValid = false;
+                } 
+                else
+                    document.getElementById("errPassfield").innerHTML = "";
+                if(form.password1.value != form.password2.value){
+                    //show error
+                    document.getElementById("errMatch").innerHTML = "Passwords do not match.";
+                    isValid = false;
+                } 
+                else
+                    document.getElementById("errMatch").innerHTML = "";
+               if(isValid)
+                   form.submit();               
+                    
+                    
             }
         </script>
     </head>
@@ -30,7 +77,7 @@
             
         <h1>New Account</h1>
             <form action="accountVerify.jsp" method="post">
-                <table border="0" align="Center">
+                <table border="0" align="Left">
                     <tbody>
                         <tr>
                             <td>
@@ -38,6 +85,9 @@
                             </td>
                             <td>
                                 <p><input type="text" name="firstname"></p>
+                            </td>
+                            <td>
+                                <span id='errFname' class='error'/>
                             </td>
                         </tr>
                         <tr>
@@ -47,11 +97,20 @@
                             <td>
                                 <p><input type="text" name="lastname"></p>
                             </td>
+                            <td>
+                                <span id='errLname' class='error'/>
+                            </td>
                         </tr>
                         <tr>
                             <td class="label">Country</td>
                             <td>
-                                United States
+                                <form action="writeCountry" method="get">
+                                    <select name='country'>
+                                        <option value='United States' selected>United States
+                                        <option value="Canada"> Canada
+                                        <option value="Mexico">Mexico
+                                    </select>
+                                </form>
                             </td>
                         </tr>
                         <tr>
@@ -61,6 +120,9 @@
                             <td>
                                 <p><input type="text" name="email"></p>
                             </td>
+                            <td>
+                                <span id='errEmail' class='error'/>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -68,6 +130,9 @@
                             </td>
                             <td>
                                 <p><input type="text" name="username"></p>
+                            </td>
+                            <td>
+                                <span id='errUname' class='error'/>
                             </td>
                         </tr>
                         <tr>
@@ -77,6 +142,9 @@
                             <td>
                                 <p><input type="password" name="password1"></p>
                             </td>
+                            <td>
+                                <span id='errPassfield' class='error'/>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -84,6 +152,9 @@
                             </td>
                             <td>
                                 <p><input type="password" name="password2"></p>
+                            </td>
+                            <td>
+                                <span id='errMatch' class='error'/>
                             </td>
                         </tr>
                     </tbody>

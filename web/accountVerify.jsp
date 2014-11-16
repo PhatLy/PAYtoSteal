@@ -32,9 +32,7 @@
                         </tr>
                         <tr>
                             <td class="label">Country</td>
-                            <td>
-                                <p>United States</p>
-                            </td>
+                            <td>${param.country}</td>
                         </tr>
                         <tr>
                             <td class="label">Email</td>
