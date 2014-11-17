@@ -12,6 +12,9 @@
         <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
         <title>Welcome!</title>
         <script>
+            function validateLogin(form){
+                alert("login invalid");
+            }
             function validate(form){
                 
                 var isValid = true;
@@ -43,23 +46,33 @@
         <jsp:include page="WEB-INF/jspf/timerScript.jsp" /><%--move this to each item in product --%>
         <div class="container">
         <table width="150" border="0" align="right">
-            <tr>
-              <td>Account</td>
-              <td><form name="form1" method="post" action="">
-                <input type="text" name="acctName" id="acctName">
-              </form></td>
-            </tr>
-            <tr>
-              <td>Password</td>
-              <td><form name="form2" method="post" action="">
-                <input type="text" name="password" id="password">
-              </form></td>
-            </tr>
-            <tr>
-            	<td>
-                </td>
-                <td>
-                    <a href="createAccount.jsp"> Create Account</a>
+                <tr>
+                    <td>
+                      <p><a href="./cart.jsp"><img src="images/cart.png" alt="cart" width="40" height="40" longdesc="cart" align="right"></a></p>
+                    </td>
+                    <td>
+                        <form name="form1" method="post" action="">  
+                        <table> 
+                            <tr>
+                              <td>Account</td>
+                              <td>
+                                <input type="text" name="acctName" id="acctName">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Password</td>
+                              <td><input type="text" name="password" id="password"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type='button' value="Login" onclick="validateLogin(this.form)"/>
+                                </td>
+                                <td>
+                                    <a href="createAccount.jsp"> Create Account</a>
+                                </td>
+                            </tr>
+                    </table>  
+                    </form>
                 </td>
             </tr>
         </table>
@@ -70,6 +83,7 @@
           </div>
  
           <div class="content">
+          
             <h1>Welcome to our store!</h1>
        
             <p>Please type the number of products you'd like to view.</p>

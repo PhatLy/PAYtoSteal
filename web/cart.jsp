@@ -17,18 +17,34 @@
     <body>
     <div class="background">
         <div class="container">
-            <table width="100" border="0" align="right">
-            <tr>
-              <td>Account</td>
-              <td><form name="form1" method="post" action="">
-                <input type="text" name="acctName" id="acctName">
-              </form></td>
-            </tr>
-            <tr>
-              <td>Password</td>
-              <td><form name="form2" method="post" action="">
-                <input type="text" name="password" id="password">
-              </form></td>
+            <table width="150" border="0" align="right">
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <form name="form1" method="post" action="">  
+                        <table> 
+                            <tr>
+                              <td>Account</td>
+                              <td>
+                                <input type="text" name="acctName" id="acctName">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Password</td>
+                              <td><input type="text" name="password" id="password"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type='button' value="Login" onclick="validateLogin(this.form)"/>
+                                </td>
+                                <td>
+                                    <a href="createAccount.jsp"> Create Account</a>
+                                </td>
+                            </tr>
+                    </table>  
+                    </form>
+                </td>
             </tr>
         </table>
         <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
