@@ -52,7 +52,7 @@
                       <p><a href="./cart.jsp"><img src="images/cart.png" alt="cart" width="40" height="40" longdesc="cart" align="right"></a></p>
                     </td>
                     <td>
-                        <form name="formLogin" method="post" action="">  
+                        <form name="formLogin" method="post" action=""><!--if valid, make table invisible-->  
                         <table> 
                             <tr>
                               <td>Account</td>
