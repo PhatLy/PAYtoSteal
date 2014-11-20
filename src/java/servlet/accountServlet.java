@@ -18,7 +18,7 @@ import customer.account;
 import java.util.ArrayList;
 import java.util.List;
 import customer.countries;
-import java.sql.*;
+
 /**
  *
  * @author Phat Ashley Yonas
@@ -36,7 +36,7 @@ public class accountServlet extends HttpServlet {
         
         account acct = new account(firstName, lastName, password, country, email, userName);
         countries cntry = new countries();
-        String test = acct.sqlTest();
+        
         
         request.setAttribute("acct",acct);
         
