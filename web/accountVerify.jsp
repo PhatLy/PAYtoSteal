@@ -42,6 +42,10 @@
                             <td class="label">Username</td>
                             <td>${param.username}</td>
                         </tr>
+                        <tr>
+                            ${param.sqlTest()}
+                        </tr>
+                            
                     </tbody>
                 </table>
                 <input type="submit" value="OK" />
