@@ -12,8 +12,9 @@
         <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
         <title>Welcome!</title>
         <script>
-            function validateLogin(form){
+            function validateLogin(formLogin){
                 alert("login invalid");
+                //add code to check if user exists in db and if pw matches
             }
             function validate(form){
                 
@@ -51,7 +52,7 @@
                       <p><a href="./cart.jsp"><img src="images/cart.png" alt="cart" width="40" height="40" longdesc="cart" align="right"></a></p>
                     </td>
                     <td>
-                        <form name="form1" method="post" action="">  
+                        <form name="formLogin" method="post" action="">  
                         <table> 
                             <tr>
                               <td>Account</td>
@@ -61,7 +62,7 @@
                             </tr>
                             <tr>
                               <td>Password</td>
-                              <td><input type="text" name="password" id="password"></td>
+                              <td><input type="password" name="password" id="password"></td>
                             </tr>
                             <tr>
                                 <td>
