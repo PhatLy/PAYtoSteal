@@ -30,13 +30,6 @@
                 } 
                 else
                     document.getElementById("errLname").innerHTML = "";
-                if(form.username.value === ""){
-                    //show error
-                    document.getElementById("errUname").innerHTML = "Username can not be empty.";
-                    isValid = false;
-                } 
-                else
-                    document.getElementById("errUname").innerHTML = "";
                 if(form.email.value === ""){
                     //show error
                     document.getElementById("errEmail").innerHTML = "Email can not be empty.";
@@ -124,17 +117,7 @@
                                 <span id='errEmail' class='error'/>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <p>Username</p>
-                            </td>
-                            <td>
-                                <p><input type="text" name="username"></p>
-                            </td>
-                            <td>
-                                <span id='errUname' class='error'/>
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td>
                                 <p>Password</p>

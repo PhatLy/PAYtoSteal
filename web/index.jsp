@@ -55,7 +55,7 @@
                         <form name="formLogin" method="post" action=""><!--if valid, make table invisible-->  
                         <table> 
                             <tr>
-                              <td>Account</td>
+                              <td>Email</td>
                               <td>
                                 <input type="text" name="acctName" id="acctName">
                               </td>
