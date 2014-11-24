@@ -48,9 +48,9 @@
         <div class="container">
         <table width="150" border="0" align="right">
                 <tr>
-                    <td>
+                    <%--<td>
                       <p><a href="./cart.jsp"><img src="images/cart.png" alt="cart" width="40" height="40" longdesc="cart" align="right"></a></p>
-                    </td>
+                    </td>--%>
                     <td>
                         <form name="formLogin" method="post" action=""><!--if valid, make table invisible-->  
                         <table> 
