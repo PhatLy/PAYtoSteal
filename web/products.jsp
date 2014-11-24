@@ -43,29 +43,24 @@
             <form action="CartServlet" method="post">
                 <table border="1" align="center" cellpadding="20" cellspacing="0">
                     <tbody>        
-                        
-        <c:forEach var="item" items="${requestScope.items}">
-
+                        <c:forEach var="item" items="${requestScope.items}">
                         <tr>
-                            <td width="75px"><image src="${item.imgSrc}" width="75" height="75"></td>
-                            <td width="75px">${item.itemName}</a></td>
-                            <td width="75px">Price: $${item.price}</td>
+                            <td width="100px"><image src="${item.imgSrc}" width="75" height="75"></td>
+                            <%--<td width="100px"><a href="productsPg.jsp?name=${item.itemName}"</a>${item.itemName}</td>--%>
+                            <td>${item.itemName}</td>
+                            <td width="100px">Price: $${item.price}</td>
                             <input type="hidden" name="${item.itemName}" value="${item.itemName}"/>
-                            <td width="75px"><%--<a href="CartServlet?itemName=${item.itemName}">Add to cart</a>--%>
-                            <input type="button" value="Add to cart" 
-                                       onclick="location.href='CartServlet?itemName=${item.itemName}'; 
-                                           return false;"/></td>
+                            <td><input type="button" value="Add to cart" 
+                                       onclick="location.href='CartServlet?itemName=${item.itemName}'"/></td>
                         </tr>
-
-        </c:forEach>
-
+                        </c:forEach>
                     </tbody>
                 </table>
             </form>
                         
-        <span id="errNumber" class="error">
-            ${msg}
-        </span>
+            <span id="errNumber" class="error">
+                ${msg}
+            </span>
         
         <!-- end .content --></div>
         

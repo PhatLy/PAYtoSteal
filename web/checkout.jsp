@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="styles/styles.css" rel="stylesheet"> 
+        <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
         <title>Checkout Page</title>
        
     </head>
@@ -34,9 +34,34 @@
 
         <!-- end .header --></div>
         <div class="content">
-        <h1>Checkout</h1>
+            <h1>Checkout</h1>
         
-        <p>Your total is: $${requestScope.cost}</p>
+            <p>Your total is: $${requestScope.cost}</p>
+            <p>Enter payment information:</p>
+         
+            <form action="PaymentServlet" method="post">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><img src="images/cards.png" width="168" height="25"/></td>
+                        </tr>
+                        <tr>
+                            <td>Name on Card:</td>
+                            <td><input type="text" name="name" autocomplete="off"/></td>
+                        </tr>
+                        <tr>
+                            <td>Card Number:</td>
+                            <td><input type="text" name="num" autocomplete="off"/></td>
+                        </tr>
+                        <tr>
+                            <td>Security Code:</td>
+                            <td><input type="text" name="code" autocomplete="off"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="submit" value="Place Order"/>
+            </form>
+        
         <!-- end .content --></div>
         
         <!-- end .container --></div>

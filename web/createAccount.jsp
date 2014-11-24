@@ -80,26 +80,14 @@
                 <table border="0" align="Left">
                     <tbody>
                         <tr>
-                            <td>
-                                <p>First Name</p>
-                            </td>
-                            <td>
-                                <p><input type="text" name="firstname"></p>
-                            </td>
-                            <td>
-                                <span id='errFname' class='error'/>
-                            </td>
+                            <td><p>First Name</p></td>
+                            <td><p><input type="text" name="firstname"></p></td>
+                            <td><span id='errFname' class='error'/></td>
                         </tr>
                         <tr>
-                            <td>
-                                <p>Last Name</p>
-                            </td>
-                            <td>
-                                <p><input type="text" name="lastname"></p>
-                            </td>
-                            <td>
-                                <span id='errLname' class='error'/>
-                            </td>
+                            <td><p>Last Name</p></td>
+                            <td><p><input type="text" name="lastname"></p></td>
+                            <td><span id='errLname' class='error'/></td>
                         </tr>
                         <tr>
                             <td class="label">Country</td>
@@ -114,48 +102,24 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <p>Email</p>
-                            </td>
-                            <td>
-                                <p><input type="text" name="email"></p>
-                            </td>
-                            <td>
-                                <span id='errEmail' class='error'/>
-                            </td>
+                            <td><p>Email</p></td>
+                            <td><p><input type="text" name="email"></p></td>
+                            <td><span id='errEmail' class='error'/></td>
                         </tr>
                         <tr>
-                            <td>
-                                <p>Username</p>
-                            </td>
-                            <td>
-                                <p><input type="text" name="username"></p>
-                            </td>
-                            <td>
-                                <span id='errUname' class='error'/>
-                            </td>
+                            <td><p>Username</p></td>
+                            <td><p><input type="text" name="username"></p></td>
+                            <td><span id='errUname' class='error'/></td>
                         </tr>
                         <tr>
-                            <td>
-                                <p>Password</p>
-                            </td>
-                            <td>
-                                <p><input type="password" name="password1"></p>
-                            </td>
-                            <td>
-                                <span id='errPassfield' class='error'/>
-                            </td>
+                            <td><p>Password</p></td>
+                            <td><p><input type="password" name="password1"></p></td>
+                            <td><span id='errPassfield' class='error'/></td>
                         </tr>
                         <tr>
-                            <td>
-                                <p>Re-type Password</p>
-                            </td>
-                            <td>
-                                <p><input type="password" name="password2"></p>
-                            </td>
-                            <td>
-                                <span id='errMatch' class='error'/>
-                            </td>
+                            <td><p>Re-type Password</p></td>
+                            <td><p><input type="password" name="password2"></p></td>
+                            <td><span id='errMatch' class='error'/></td>
                         </tr>
                     </tbody>
                 </table>

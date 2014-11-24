@@ -76,20 +76,20 @@
         
             <form action='ProductsServlet' method="post">
             
-            <table border='0' align="center" cellpadding="2" cellspacing="2">
-                <tr>
-                    <td>Type number:</td>
-                    <td ><input type='text' name='txtNumber' autocomplete="off" />  
-                        <span id='errNumber' class='error'/>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type='button' value="Display products" onclick="validate(this.form)"/></td>
-                </tr>
-            </table>
+                <table border='0' align="center" cellpadding="2" cellspacing="2">
+                    <tr>
+                        <td>Type number:</td>
+                        <td ><input type='text' name='txtNumber' autocomplete="off" />  
+                            <span id='errNumber' class='error'/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type='button' value="Display products" onclick="validate(this.form)"/></td>
+                    </tr>
+                </table>
             
-        </form>
+            </form>
             <!-- end .content --></div>
             <%@include file="/WEB-INF/jspf/footer.jspf" %>
           <!-- end .container --></div>
