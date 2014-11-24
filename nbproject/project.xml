@@ -14,10 +14,13 @@
                     <file>${file.reference.Web_Development-mysql-connector-java-5.1.34}</file>
                     <path-in-war>WEB-INF/classes</path-in-war>
                 </library>
+<<<<<<< HEAD
                 <library dirs="200">
                     <file>${file.reference.mysql-connector-java-5.1.34-bin.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+=======
+>>>>>>> origin/PAY-Branch
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
