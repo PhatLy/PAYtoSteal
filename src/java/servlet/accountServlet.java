@@ -18,6 +18,7 @@ import customer.account;
 import java.util.ArrayList;
 import java.util.List;
 import customer.countries;
+
 /**
  *
  * @author Phat Ashley Yonas
@@ -33,12 +34,16 @@ public class accountServlet extends HttpServlet {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
         
-        account acct = new account(firstName, lastName, password);
+        account acct = new account(firstName, lastName, password, country, email, userName);
         countries cntry = new countries();
+        
         
         request.setAttribute("acct",acct);
         
         HttpSession session = request.getSession();
+        
+        
+        
         
     }
     

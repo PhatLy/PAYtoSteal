@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package customer;
+
 /**
  *
- * @author Phat
+ * @author Phat Ashley Yonas
  */
 public class account {
+    
+    
     String firstName;
     String lastName;
     String country;
@@ -16,11 +19,13 @@ public class account {
     String username;
     String password;    
     
-    //request.setAttribute("firstName", firstName);
-    public account(String first, String last, String pw){
+    public account(String first, String last, String pw, String ctr, String em, String un){
         firstName=first;
         lastName=last;
         password=pw;
+        country=ctr;
+        email=em;
+        username=un;
         
     }
     public String getFirst(){
@@ -32,4 +37,5 @@ public class account {
     public String getPw(){
         return password;
     }
+    
 }

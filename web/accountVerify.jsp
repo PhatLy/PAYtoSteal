@@ -38,10 +38,7 @@
                             <td class="label">Email</td>
                             <td>${param.email}</td>
                         </tr>
-                        <tr>
-                            <td class="label">Username</td>
-                            <td>${param.username}</td>
-                        </tr>
+                            
                     </tbody>
                 </table>
                 <input type="submit" value="OK" />

@@ -17,26 +17,47 @@
     <body>
     <div class="background">
         <div class="container">
-        <table width="100" border="0" align="right">
-            <tr>
-              <td>Account</td>
-              <td><form name="form1" method="post" action="">
-                <input type="text" name="acctName" id="acctName">
-              </form></td>
-            </tr>
-            <tr>
-              <td>Password</td>
-              <td><form name="form2" method="post" action="">
-                <input type="text" name="password" id="password">
-              </form></td>
+          
+        <table width="150" border="0" align="right">
+                <tr>
+                    <td>
+                      <p><a href="./cart.jsp"><img src="images/cart.png" alt="cart" width="40" height="40" longdesc="cart" align="right"></a></p>
+                    </td>
+                    <td>
+                        <form name="form1" method="post" action="">  
+                        <table> 
+                            <tr>
+                              <td>Account</td>
+                              <td>
+                                <input type="text" name="acctName" id="acctName">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Password</td>
+                              <td><input type="text" name="password" id="password"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type='button' value="Login" onclick="validateLogin(this.form)"/>
+                                </td>
+                                <td>
+                                    <a href="createAccount.jsp"> Create Account</a>
+                                </td>
+                            </tr>
+                    </table>  
+                    </form>
+                </td>
             </tr>
         </table>
-
-        <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
-        <!-- end .header --></div> 
         
-        <div class="content">
-        
+        <table width="150" border="0" align="right">
+            
+        </table>
+          <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+          </div>
+ 
+          <div class="content">
+          
         <h1>Pick an item to add to your cart</h1>
         <%-- yonas: 1. moved form tag out of the for loop.
                     2. replaced form submit with anchor link--%>
