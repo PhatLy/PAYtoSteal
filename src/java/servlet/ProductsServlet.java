@@ -11,7 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import product.Item;
 import product.util.ProdMgmt;
 import java.util.*;
@@ -34,7 +33,7 @@ public class ProductsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int itemListLimit = Integer.parseInt(request.getParameter("txtNumber"));
+        int itemListLimit = request.getParameter("itemCount") == null ? Integer.parseInt(request.getParameter("txtNumber")) : Integer.parseInt(request.getParameter("itemCount"));
         
         ProdMgmt pm = new ProdMgmt();
         Item[] items = pm.getItems();
@@ -54,14 +53,6 @@ public class ProductsServlet extends HttpServlet {
                   + "Sorry, we only have "+ items.length +" this time. Check us back soon!";
             itemListLimit = items.length;
         }   
-        
-        //we'll need to remember the value of itemListLimit while the user is in active session
-        //the continue shopping button will use this session variable
-        //to take the user back to the products page with the 
-        //correct number of items listed.
-        HttpSession session = request.getSession();
-        session.setAttribute("itemListLimit", itemListLimit);
-        
         request.setAttribute("msg", msg);
         ArrayList<Item> list = new ArrayList<>();        
         
@@ -70,6 +61,7 @@ public class ProductsServlet extends HttpServlet {
             list.add(items[i]);
         }
         request.setAttribute("items", list);
+        request.setAttribute("itemCount", itemListLimit);
         
         String url = "/products.jsp";
         

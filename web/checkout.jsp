@@ -57,7 +57,7 @@
             <p>Enter payment information:</p>
          
             <form action="PaymentServlet" method="post">
-                <table>
+                <table align="center">
                     <tbody>
                         <tr>
                             <td><img src="images/cards.png" width="168" height="25"/></td>

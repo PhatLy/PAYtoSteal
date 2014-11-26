@@ -6,7 +6,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,7 +44,7 @@ public class CheckoutServlet extends HttpServlet {
         
         double sum = 0;
         for (LineItem i: items) {
-            double price = Double.parseDouble(i.getItem().getPrice());
+            double price = i.getItem().getPrice();
             sum += price * i.getQuantity();
         }
         

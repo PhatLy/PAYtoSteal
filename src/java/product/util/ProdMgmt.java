@@ -6,7 +6,6 @@
 package product.util;
 
 import product.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -14,9 +13,9 @@ import java.util.ArrayList;
  */
 public class ProdMgmt {
     public Item[] getItems() {
-        Item[] items = {new Item("images/iphone.jpg","Apple iPhone","199.99",""), 
-                        new Item("images/textbook.jpg","Textbook","100.00",""),
-                        new Item("images/fan.jpg","Desk Fan","23.99","")};
+        Item[] items = {new Item("images/iphone.jpg","Apple iPhone",199.99,""), 
+                        new Item("images/textbook.jpg","Textbook",100.00,""),
+                        new Item("images/fan.jpg","Desk Fan",23.99,"")};
         
         return items;
     }
