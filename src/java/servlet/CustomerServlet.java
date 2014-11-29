@@ -1,6 +1,7 @@
 package servlet;
 
 import customer.Customer;
+import dbutil.DBUtil;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +19,7 @@ public class CustomerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Customer cust = new Customer();
+        DBUtil db = new DBUtil();
         HttpSession session = request.getSession();
 
         String firstName = request.getParameter("firstname");
@@ -29,7 +30,7 @@ public class CustomerServlet extends HttpServlet {
 
         //request is to add a new customer
         if (request.getParameter("hidAction").equals("Create")) {
-            cust.addCustomer(firstName, lastName, email, password, country);
+            db.addCustomer(firstName, lastName, email, password, country);
             request.setAttribute("msg", "Account created successfuly!");
 
             String url = "/IndexServlet";
@@ -41,8 +42,9 @@ public class CustomerServlet extends HttpServlet {
 
         //request is to update customer record
         if (request.getParameter("hidAction").equals("Update")) {
-            cust.updateCustomer(firstName, lastName, email, password, country);
-
+            db.updateCustomer(firstName, lastName, email, password, country);
+            
+            Customer cust = new Customer();
             //update session
             cust = (Customer) session.getAttribute("customer");
 
@@ -66,7 +68,7 @@ public class CustomerServlet extends HttpServlet {
         //request is to delete a customer
         if (request.getParameter("hidAction").equals("Delete")) {
             
-            cust.deleteCustomer(email);
+            db.deleteCustomer(email);
             request.setAttribute("msg", "Account deleted successfuly!");
 
             //auto logout customer.
@@ -82,7 +84,7 @@ public class CustomerServlet extends HttpServlet {
 
         if (request.getParameter("hidAction").equals("Login")) {
 
-            Customer validCust = cust.isCustomer(request.getParameter("acctName"), request.getParameter("password"));
+            Customer validCust = db.isCustomer(request.getParameter("acctName"), request.getParameter("password"));
 
             if (validCust != null) {
 

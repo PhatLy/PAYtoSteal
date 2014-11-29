@@ -41,5 +41,5 @@ public class LineItem implements Serializable{
     
     public void incQuantity() {
         quantity += 1;
-}
+    }
 }

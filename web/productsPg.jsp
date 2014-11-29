@@ -9,7 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${requestScope.name.itemName}</title>
+        <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
+        <title>${requestScope.item.itemName}</title>
     </head>
     <body>
         <div class="background">
@@ -34,22 +35,24 @@
         
         <div class="content">
         
-        <h1>${requestScope.name.itemName}</h1>
-        <form>
+        <h1>${requestScope.item.itemName}</h1>
+        <form action="CartServlet" method="post">
             <table>
                 <tbody>
                     <tr>
-                        <td rowspan="3"><image src=${requestScope.name.imgSrc} width="200" height="200"></td>
-                        <td>Price: $${requestScope.name.price}</td>
+                        <td rowspan="3"><image src="images/${requestScope.item.imgSrc}" width="200" height="200"></td>
+                        <td>Price: $${requestScope.item.price}</td>
                     </tr>
                     <tr>
                         <td>Description:</td>
                     </tr>
                     <tr>
-                        <td>${requestScope.name.description}</td>
+                        <td>${requestScope.item.description}</td>
+                        <input type="hidden" name="itmSku" value='${requestScope.item.sku}'/>
                     </tr>
                 </tbody>
             </table>
+            <input type="submit" value="Add to Cart"/>
         </form>
                     
         <!-- end .content --></div>

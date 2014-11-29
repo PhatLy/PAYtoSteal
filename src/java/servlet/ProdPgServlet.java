@@ -5,22 +5,22 @@
  */
 package servlet;
 
+import dbutil.DBUtil;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import product.Item;
-import product.util.ProdMgmt;
-import java.util.*;
 
 /**
  *
- * @author Ashley, Phat, Yonas
+ * @author Ashley
  */
-public class ProductsServlet extends HttpServlet {
-
+@WebServlet(name = "ProdPgServlet", urlPatterns = {"/ProdPgServlet"})
+public class ProdPgServlet extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,41 +32,22 @@ public class ProductsServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int itemListLimit = request.getParameter("itemCount") == null ? Integer.parseInt(request.getParameter("txtNumber")) : Integer.parseInt(request.getParameter("itemCount"));
-        
-        ProdMgmt pm = new ProdMgmt();
-        Item[] items = pm.getItems();
-        
-        //now display products per the list limit submitted from
-        //index page.
-        //itemListLimit can not be greater than the number of 
-        //products we've so. if itemListLimit is larger than item[]
-        //take the size of the item[] array.
-        //and show a message to the customer.
-        String msg = "";
-        if(itemListLimit > items.length)
-        {
-            //itemListLimit = items.length; yonas: moved this down as the message below needs 
-            //to display the original #of products the user requested to view.
-            msg = "You requested " + itemListLimit + " items to be listed. \n"
-                  + "Sorry, we only have "+ items.length +" this time. Check us back soon!";
-            itemListLimit = items.length;
-        }   
-        request.setAttribute("msg", msg);
-        ArrayList<Item> list = new ArrayList<>();        
-        
-        for(int i = 0; i < itemListLimit; i++)
-        {
-            list.add(items[i]);
+        String prod = request.getParameter("itmSku");
+        DBUtil db = new DBUtil();
+        Item it = db.getItem(prod);
+
+        String url;
+        if (it == null) {
+            url = "/IndexServlet";
+            //set error message, should never hapen?
         }
-        request.setAttribute("items", list);
-        request.setAttribute("itemCount", itemListLimit);
-        
-        String url = "/products.jsp";
-        
-        RequestDispatcher dispatcher =
-             getServletContext().getRequestDispatcher(url);
+        else {
+            url = "/productsPg.jsp";
+            request.setAttribute("item", it);
+        }
+
+        RequestDispatcher dispatcher
+                = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
 

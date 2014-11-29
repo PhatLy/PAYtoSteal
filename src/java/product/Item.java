@@ -32,18 +32,15 @@ public class Item implements Serializable {
     private Date discountEndTime;
 
     public Item() {
+        sku = "";
         imgSrc = "images/noItem.png";
         itemName = "";
         price = 0;
         description = "";
-    }
-
-    //Yonas: left this for compatibility with the existing cart implementation
-    public Item(String src, String nme, double amt, String desc) {
-        imgSrc = src;
-        itemName = nme;
-        price = amt;
-        description = desc;
+        discount = 0;
+        discountCurrentTime = new java.util.Date();
+        discountStartTime = null;
+        discountEndTime = null;
     }
 
     public Item(String sku, String imgSrc, String itemName, double price, String description, double discount, Date discountStartTime, Date discountEndTime) {
@@ -125,147 +122,4 @@ public class Item implements Serializable {
     public void setDiscountEndTime(Date discountEndTime) {
         this.discountEndTime = discountEndTime;
     }
-
-    public int addItem(String sku, String imgSrc, String itemName, double price, String description, double discount, String discountStartTime, String discountEndTime) {
-        int rowsAffected = 0;
-
-        try {
-            ConnectionPool cp = new ConnectionPool();
-
-            String query = "insert into item (sku, imgSrc, itemName, price, description, discount, discountStartTime, discountEndTime ) "
-                    + " values(?,?,?,?,?,?,?,?)";
-
-            PreparedStatement stmt = cp.connection.prepareStatement(query);
-            stmt.setString(1, sku);
-            stmt.setString(2, imgSrc);
-            stmt.setString(3, itemName);
-            stmt.setDouble(4, price);
-            stmt.setString(5, description);
-            stmt.setDouble(6, discount);
-            stmt.setString(7, discountStartTime);
-            stmt.setString(8, discountEndTime);
-
-            rowsAffected = stmt.executeUpdate();
-
-            stmt.close();
-            cp.closeConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
-        }
-
-        return rowsAffected;
-    }
-
-    public int updateItem(String sku, String imgSrc, String itemName, double price, String description, double discount, Date discountStartTime, Date discountEndTime) {
-        int rowsAffected = 0;
-
-        try {
-            ConnectionPool cp = new ConnectionPool();
-
-            String query = "update item set imgSrc = ?, itemName = ?, price = ?, description = ?, "
-                    + "discount = ?, discountStartTime = ?, discountEndTime = ?"
-                    + "where sku = ? ";
-
-            PreparedStatement stmt = cp.connection.prepareStatement(query);
-            stmt.setString(1, imgSrc);
-            stmt.setString(2, itemName);
-            stmt.setDouble(3, price);
-            stmt.setString(4, description);
-            stmt.setDouble(5, discount);
-            stmt.setDate(6, (java.sql.Date) discountStartTime);
-            stmt.setDate(7, (java.sql.Date) discountEndTime);
-            stmt.setString(8, sku);
-
-            rowsAffected = stmt.executeUpdate();
-
-            stmt.close();
-            cp.closeConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
-        }
-
-        return rowsAffected;
-    }
-
-    public int deleteItem(String sku) {
-
-        int rowsAffected = 0;
-
-        try {
-            ConnectionPool cp = new ConnectionPool();
-
-            String query = "delete from item where sku = ? ";
-
-            PreparedStatement stmt = cp.connection.prepareStatement(query);
-            stmt.setString(1, sku);
-
-            rowsAffected = stmt.executeUpdate();
-
-            stmt.close();
-            cp.closeConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
-        }
-
-        return rowsAffected;
-
-    }
-
-    public List<Item> listItems(int max) {
-
-        ResultSet rs = null;
-        List<Item> items = new ArrayList<Item>();
-        Item it = null;
-
-        try {
-            ConnectionPool cp = new ConnectionPool();
-
-            String query = " select i.sku, i.imgSrc, i.itemName, i.price, "
-                    + "i.description, i.discount, i.discountStartTime, "
-                    + "i.discountEndTime "
-                    + "from item i "
-                    + "order by i.discountEndTime ";
-
-            //if max is 0 list all items
-            query = max == 0 ? query : query + "limit ?";
-
-            PreparedStatement stmt = cp.connection.prepareStatement(query);
-
-            if (max > 0) {
-                stmt.setInt(1, max);
-            }
-
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                it = new Item();
-                it.setSku(rs.getString("sku"));
-                it.setItemName(rs.getString("itemName"));
-                it.setImgSrc(rs.getString("imgSrc"));
-                it.setPrice(rs.getDouble("price"));
-                it.setDescription(rs.getString("description"));
-                it.setDiscount(rs.getDouble("discount"));
-                it.setDiscountStartTime(rs.getDate("discountStartTime"));
-                it.setDiscountEndTime(rs.getDate("discountEndTime"));
-
-                items.add(it);
-
-            }
-
-            rs.close();
-            stmt.close();
-            cp.closeConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getMessage());
-        }
-
-        return items;
-
-    }
-
 }

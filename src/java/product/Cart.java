@@ -26,6 +26,13 @@ public class Cart implements Serializable{
         return items;
     }
     
+    public void setItems(ArrayList<LineItem> a){
+        items.clear();
+        for (int i = 0; i < a.size(); i++) {
+            items.add(a.get(i));
+        }
+    }
+    
     public void addItem(LineItem p) {
         if (items.contains(p)) {
             int i = items.indexOf(p);

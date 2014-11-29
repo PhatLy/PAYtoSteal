@@ -59,7 +59,7 @@
                 <tbody>
                     <c:forEach var="itm" items="${sessionScope.cart.items}">
                     <tr>
-                        <td><image src=${itm.item.imgSrc} width="75" height="75"></td>
+                        <td><image src="images/${itm.item.imgSrc}" width="75" height="75"></td>
                         <td>${itm.item.itemName}</td>
                         <td>Price: $${itm.item.price}</td>
                         <td>Quantity: ${itm.quantity}</td>
@@ -70,9 +70,8 @@
             <br><input type="submit" value="Checkout"/>
         </form>
         
-        <form action="ProductsServlet" method="post">
+        <form action="IndexServlet" method="post">
             <tr>
-                <input type="hidden" name="txtNumber" value="${sessionScope.itemListLimit}"/>
                 <td><br><input type="submit" value="Continue Shopping"/></td>
             </tr>
         </form>

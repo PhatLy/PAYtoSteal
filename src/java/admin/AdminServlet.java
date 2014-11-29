@@ -5,6 +5,7 @@
  */
 package admin;
 
+import dbutil.DBUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -35,7 +36,7 @@ public class AdminServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Item it = new Item();
+        DBUtil db = new DBUtil();
 
         String sku = "";
         String imgSrc = "";
@@ -62,7 +63,7 @@ public class AdminServlet extends HttpServlet {
             discountStartTime = request.getParameter("txtDiscountStartTime");
             discountEndTime = request.getParameter("txtDiscountEndTime");
 
-            it.addItem(sku, imgSrc, itemName, price, description, discount, discountStartTime, discountEndTime);
+            db.addItem(sku, imgSrc, itemName, price, description, discount, discountStartTime, discountEndTime);
 
             request.setAttribute("msg", "Product created successfuly!");
 
@@ -77,7 +78,7 @@ public class AdminServlet extends HttpServlet {
         //typing 0 lists all
         if (action != null && action.equals("List")) {
             
-            request.setAttribute("items", it.listItems(0));
+            request.setAttribute("items", db.listItems(0));
 
             String url = "/admin/productList.jsp";
 
@@ -89,9 +90,9 @@ public class AdminServlet extends HttpServlet {
         
         if (action != null && action.equals("Delete")) {
             
-            it.deleteItem(sku);
+            db.deleteItem(sku);
             
-            request.setAttribute("items", it.listItems(0));
+            request.setAttribute("items", db.listItems(0));
 
             String url = "/admin/productList.jsp";
 
@@ -99,10 +100,8 @@ public class AdminServlet extends HttpServlet {
                     = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         }
-        
-
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -141,5 +140,4 @@ public class AdminServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
