@@ -131,7 +131,7 @@
                     </c:forEach>
 
                     <!-- end .content --></div>
-                    <%@include file="/WEB-INF/jspf/footer.jspf" %>
+                    <%--@include file="/WEB-INF/jspf/footer.jspf" --%>
                 <!-- end .container --></div>
             <!-- end background --></div>      
     </body>
