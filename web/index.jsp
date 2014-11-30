@@ -73,7 +73,7 @@
                 <div class="content">
 
                     <script>;
-                        /*more info on this script
+                        /*more info on this script 
                          https://blog.smalldo.gs/2013/12/create-simple-countdown/
                          */
                         function startCountdown(placeHolder, year, month, day, hour, minute) {
