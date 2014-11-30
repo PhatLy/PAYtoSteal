@@ -68,7 +68,7 @@
         <!-- end .content --></div>
         
         <!-- end .container --></div>
-        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+      <%@include file="../includes/footer.jsp" %>
     <!-- end background --></div>            
     </body>
 </html>

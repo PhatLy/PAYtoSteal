@@ -196,7 +196,7 @@
                         </c:if>
 
                         <!-- end .content --></div>
-                        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+                         <%@include file="../includes/footer.jsp" %>
                     <!-- end .container --></div>
             </div><!--end background-->
     </body>

@@ -56,7 +56,7 @@ public class Cart {
 
     public double getTotalAmount() {
         for (LineItem l : items) {
-            totalAmount += l.getPrice();
+            totalAmount += l.getDiscountedPrice(); //calculate discounted price (not base price)
         }
         return totalAmount;
     }
