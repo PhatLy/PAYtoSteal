@@ -18,7 +18,8 @@ import product.Item;
  * @author Ashley
  */
 public class DBUtil {
-/* Customer util */
+    /* Customer util */
+
     public int addCustomer(String firstName, String lastName, String email, String password, String country) {
 
         int rowsAffected = 0;
@@ -168,8 +169,8 @@ public class DBUtil {
         }
         return customers;
     }
-    
-/* Product util */
+
+    /* Product util */
     public int addItem(int sku, String imgSrc, String itemName, double price, String description, double discount, String discountStartTime, String discountEndTime) {
         int rowsAffected = 0;
 
@@ -308,7 +309,7 @@ public class DBUtil {
 
         return items;
     }
-    
+
     public Item getItem(String skuS) {
         int sku = Integer.parseInt(skuS);
         ResultSet rs = null;
@@ -325,14 +326,15 @@ public class DBUtil {
 
             if (rs.next()) {
 
-                it = new Item(rs.getInt("sku"),
-                        rs.getString("imgSrc"),
-                        rs.getString("itemName"),
-                        rs.getDouble("price"),
-                        rs.getString("description"),
-                        rs.getDouble("discount"),
-                        rs.getDate("discountStartTime"),
-                        rs.getDate("discountEndTime"));
+                it = new Item();
+                it.setSku(rs.getInt("sku"));
+                it.setImgSrc(rs.getString("imgSrc"));
+                it.setItemName(rs.getString("itemName"));
+                it.setPrice(rs.getDouble("price"));
+                it.setDescription(rs.getString("description"));
+                it.setDiscount(rs.getDouble("discount"));
+                it.setDiscountStartTime(rs.getDate("discountStartTime"));
+                it.setDiscountEndTime(rs.getDate("discountEndTime"));
 
             }
 
@@ -346,4 +348,3 @@ public class DBUtil {
         return it;
     }
 }
-

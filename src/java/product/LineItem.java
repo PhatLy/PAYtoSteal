@@ -82,8 +82,7 @@ public class LineItem implements Serializable {
     }
 
     public double getDiscountedPrice() {
-        this.discountedPrice = (price - (price * (discount / 100)));
-        return discountedPrice;
+        return this.discountedPrice;
     }
 
     public void setDiscountedPrice(double discountedPrice) {

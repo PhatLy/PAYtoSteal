@@ -106,7 +106,7 @@
                                         <td style="text-align:left;">
                                 <strike>Price: <fmt:formatNumber type="currency" value="${item.price}"/></strike><br>
                                 Discount: <fmt:formatNumber type="percent" value="${item.discount/100}"/><br>
-                                Discounted price: <fmt:formatNumber type="currency" value="${item.price - (item.price * (item.discount/100))}"/><br>
+                                Discounted price: <fmt:formatNumber type="currency" value="${item.discountedPrice}"/><br>
 
                                 <%--Unique placeholder id for each item. ignore the
                                     bad value warning for the div below. --%>
