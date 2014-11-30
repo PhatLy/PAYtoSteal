@@ -1,27 +1,94 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package product;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.sql.Date;
+
 /**
  *
  * @author Ashley, Phat, Yonas
  */
-public class Cart implements Serializable{
+public class Cart {
+
+    private String orderNumber;
+    private String customerEmail;
+    private Date orderDate;
+    private double totalAmount;
+    private String nameOnCard;
+    private String cardNumber;
+    private String securityCode;
     private ArrayList<LineItem> items;
-    
+
     public Cart() {
+        this.orderNumber = "";
+        this.customerEmail = "";
+        this.orderDate = new java.sql.Date(new java.util.Date().getTime());;
+        this.totalAmount = 0;
+        this.nameOnCard = "";
+        this.cardNumber = "";
+        this.securityCode = "";
         items = new ArrayList<>();
     }
-    
-    public int getSize() {
-        return items.size();
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public Date getOrderDate() {
+        return this.orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public double getTotalAmount() {
+        for (LineItem l : items) {
+            totalAmount += l.getPrice();
+        }
+        return totalAmount;
     }
     
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getNameOnCard() {
+        return nameOnCard;
+    }
+
+    public void setNameOnCard(String nameOnCard) {
+        this.nameOnCard = nameOnCard;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getSecurityCode() {
+        return securityCode;
+    }
+
+    public void setSecurityCode(String securityCode) {
+        this.securityCode = securityCode;
+    }
+
     public ArrayList<LineItem> getItems(){
         return items;
     }
@@ -33,22 +100,62 @@ public class Cart implements Serializable{
         }
     }
     
-    public void addItem(LineItem p) {
-        if (items.contains(p)) {
-            int i = items.indexOf(p);
-            LineItem lItem = items.get(i);
-            lItem.incQuantity();
+    public int getSize() {
+        return items.size();
+    }
+    
+    public void addItem(String orderNumber, int sku, String itemName, double price) {
+
+        boolean found = false;
+
+        //check if the item is already in the list
+        for (LineItem i : items) {
+            if (i.getItemSku() == sku) {//item is in the cart
+                i.incQuantity();
+                found = true;
+            }
+
+            if (found) {
+                break; //no need to loop further, exit.
+            }
         }
-        else {
-            items.add(p);
-            p.incQuantity();
+
+        //item is not in cart, add as a new item.
+        if (!found) {
+            LineItem l = new LineItem();
+            l.setItemSku(sku);
+            l.setOrderNumber(orderNumber);
+            l.setItemName(itemName);
+            l.setPrice(price);
+            l.setQuantity(1);
+
+            items.add(l);
         }
     }
     
-    public void removeItem(LineItem p) {
-        items.remove(p);
+    public void updateItem(int sku, int quantity) {
+        boolean found = false;
+
+        //check if the item is already in the list
+        for (LineItem i : items) {
+            if (i.getItemSku() == sku) {//item is in the cart
+                if (quantity == 0) {//zero quantity will remove the item from the cart
+                    removeItem(i);
+                } else {
+                    i.setQuantity(quantity);
+                }
+                found = true;
+            }
+            if (found) {
+                break;
+            }
+        }
     }
     
+    public void removeItem(LineItem item) {
+        items.remove(item);
+    }
+
     public void emptyCart() {
         items.clear();
     }

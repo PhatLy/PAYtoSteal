@@ -30,7 +30,7 @@
             </tr>
         </table>
 
-        <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+        <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
         <!-- end .header --></div> 
         
         <div class="content">
@@ -55,7 +55,10 @@
                     </tr>
                     <tr>
                         <td>${requestScope.item.description}</td>
-                        <input type="hidden" name="itmSku" value='${requestScope.item.sku}'/>
+                        <input type="hidden" name="hidSku" value="${item.sku}"/>
+                        <input type="hidden" name="hidItemName" value="${item.itemName}"/>
+                        <input type="hidden" name="hidItemPrice" value="${item.price}"/>
+                        <input type="hidden" name="hidAction" value="add"/>
                     </tr>
                 </tbody>
             </table>

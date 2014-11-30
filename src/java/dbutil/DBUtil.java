@@ -170,7 +170,7 @@ public class DBUtil {
     }
     
 /* Product util */
-    public int addItem(String sku, String imgSrc, String itemName, double price, String description, double discount, String discountStartTime, String discountEndTime) {
+    public int addItem(int sku, String imgSrc, String itemName, double price, String description, double discount, String discountStartTime, String discountEndTime) {
         int rowsAffected = 0;
 
         try {
@@ -180,7 +180,7 @@ public class DBUtil {
                     + " values(?,?,?,?,?,?,?,?)";
 
             PreparedStatement stmt = cp.connection.prepareStatement(query);
-            stmt.setString(1, sku);
+            stmt.setInt(1, sku);
             stmt.setString(2, imgSrc);
             stmt.setString(3, itemName);
             stmt.setDouble(4, price);
@@ -201,7 +201,7 @@ public class DBUtil {
         return rowsAffected;
     }
 
-    public int updateItem(String sku, String imgSrc, String itemName, double price, String description, double discount, Date discountStartTime, Date discountEndTime) {
+    public int updateItem(int sku, String imgSrc, String itemName, double price, String description, double discount, Date discountStartTime, Date discountEndTime) {
         int rowsAffected = 0;
 
         try {
@@ -219,7 +219,7 @@ public class DBUtil {
             stmt.setDouble(5, discount);
             stmt.setDate(6, (java.sql.Date) discountStartTime);
             stmt.setDate(7, (java.sql.Date) discountEndTime);
-            stmt.setString(8, sku);
+            stmt.setInt(8, sku);
 
             rowsAffected = stmt.executeUpdate();
 
@@ -233,7 +233,7 @@ public class DBUtil {
         return rowsAffected;
     }
 
-    public int deleteItem(String sku) {
+    public int deleteItem(int sku) {
 
         int rowsAffected = 0;
 
@@ -243,7 +243,7 @@ public class DBUtil {
             String query = "delete from item where sku = ? ";
 
             PreparedStatement stmt = cp.connection.prepareStatement(query);
-            stmt.setString(1, sku);
+            stmt.setInt(1, sku);
 
             rowsAffected = stmt.executeUpdate();
 
@@ -267,11 +267,9 @@ public class DBUtil {
         try {
             ConnectionPool cp = new ConnectionPool();
 
-            String query = " select i.sku, i.imgSrc, i.itemName, i.price, "
-                    + "i.description, i.discount, i.discountStartTime, "
-                    + "i.discountEndTime "
-                    + "from item i "
-                    + "order by i.discountEndTime ";
+            String query = " SELECT * FROM item i "
+                    + " where i.discountStartTime <= now() and i.discountEndTime >= now() "
+                    + " order by i.discount ";
 
             //if max is 0 list all items
             query = max == 0 ? query : query + "limit ?";
@@ -287,14 +285,14 @@ public class DBUtil {
             while (rs.next()) {
 
                 it = new Item();
-                it.setSku(rs.getString("sku"));
+                it.setSku(rs.getInt("sku"));
                 it.setItemName(rs.getString("itemName"));
                 it.setImgSrc(rs.getString("imgSrc"));
                 it.setPrice(rs.getDouble("price"));
                 it.setDescription(rs.getString("description"));
                 it.setDiscount(rs.getDouble("discount"));
-                it.setDiscountStartTime(rs.getDate("discountStartTime"));
-                it.setDiscountEndTime(rs.getDate("discountEndTime"));
+                it.setDiscountStartTime(rs.getTimestamp("discountStartTime"));
+                it.setDiscountEndTime(rs.getTimestamp("discountEndTime"));
 
                 items.add(it);
 
@@ -309,10 +307,10 @@ public class DBUtil {
         }
 
         return items;
-
     }
     
-    public Item getItem(String sku) {
+    public Item getItem(String skuS) {
+        int sku = Integer.parseInt(skuS);
         ResultSet rs = null;
         Item it = null;
 
@@ -327,7 +325,7 @@ public class DBUtil {
 
             if (rs.next()) {
 
-                it = new Item(rs.getString("sku"),
+                it = new Item(rs.getInt("sku"),
                         rs.getString("imgSrc"),
                         rs.getString("itemName"),
                         rs.getDouble("price"),
@@ -336,9 +334,6 @@ public class DBUtil {
                         rs.getDate("discountStartTime"),
                         rs.getDate("discountEndTime"));
 
-            }
-            else {
-                System.out.println("None");
             }
 
             rs.close();
@@ -350,6 +345,5 @@ public class DBUtil {
         }
         return it;
     }
-
 }
 

@@ -12,33 +12,60 @@ import java.io.Serializable;
  * @author Ashley, Phat, Yonas
  */
 public class LineItem implements Serializable{
-    private Item item;
+    private String orderNumber;
+    private int itemSku;
+    private String itemName;
+    private double price;
     private int quantity;
-    
+
     public LineItem() {
-        item = null;
+        orderNumber = "";
+        itemSku = 0;
+        itemName = "";
+        price = 0;
         quantity = 0;
     }
-    
-    public LineItem(Item p, int num) {
-        item = p;
-        quantity = num;
+
+    public int getItemSku() {
+        return itemSku;
     }
-    
-    public void setItem(Item p) {
-        item = p;
+
+    public void setItemSku(int itemSku) {
+        this.itemSku = itemSku;
     }
-    public Item getItem() {
-        return item;
+
+    public String getOrderNumber() {
+        return orderNumber;
     }
-    
-    public void setQuantity(int num) {
-        quantity = num;
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getQuantity() {
         return quantity;
     }
-    
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public void incQuantity() {
         quantity += 1;
     }

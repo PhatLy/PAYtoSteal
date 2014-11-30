@@ -7,16 +7,11 @@ package admin;
 
 import dbutil.DBUtil;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import product.Item;
 
 /**
  *
@@ -38,7 +33,7 @@ public class AdminServlet extends HttpServlet {
 
         DBUtil db = new DBUtil();
 
-        String sku = "";
+        int sku = 0;
         String imgSrc = "";
         String itemName = "";
         double price = 0;
@@ -52,8 +47,7 @@ public class AdminServlet extends HttpServlet {
 
         //request is to add a new customer
         if (action != null && action.equals("Create")) {
-
-            sku = request.getParameter("txtSku");
+            sku = Integer.parseInt(request.getParameter("txtSku"));
             imgSrc = request.getParameter("txtImgSrc");
             itemName = request.getParameter("txtItemName");
             price = Double.parseDouble(request.getParameter("txtPrice"));
@@ -73,7 +67,6 @@ public class AdminServlet extends HttpServlet {
                     = getServletContext().getRequestDispatcher(url);
             dispatcher.forward(request, response);
         }
-
         //default action is to list all items
         //typing 0 lists all
         if (action != null && action.equals("List")) {

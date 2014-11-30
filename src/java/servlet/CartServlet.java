@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import dbutil.DBUtil;
+import customer.Customer;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.*;
 import javax.servlet.RequestDispatcher;
 import product.*;
 
@@ -23,49 +22,79 @@ import product.*;
  */
 @WebServlet(name = "CartServlet", urlPatterns = {"/CartServlet"})
 public class CartServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String prod = request.getParameter("itmSku");
-        DBUtil db = new DBUtil();
-        Item it = db.getItem(prod);
-       
-        HttpSession session = request.getSession();
-        Cart c = (Cart) session.getAttribute("cart");  
 
-        if (c == null) {
-            c = new Cart();
-        }
-        
-        ArrayList<LineItem> line = c.getItems();
-        
-        LineItem lItem = null;
-        for (int i = 0; i < c.getSize(); i++) {
-            if (line.get(i).getItem().getSku().equals(it.getSku())) {
-                lItem = line.get(i);
+        HttpSession session = request.getSession();
+        Cart c = (Cart) session.getAttribute("cart");
+
+        //Order number is the first 6 letters of the session id
+        String orderNumber = session.getId().substring(0, 6);
+        Customer customer = (Customer) session.getAttribute("customer");
+        int sku = Integer.parseInt(request.getParameter("hidSku"));
+
+        if (request.getParameter("hidAction").equals("add")) {
+
+            String itemName = request.getParameter("hidItemName");
+            double price = Double.parseDouble(request.getParameter("hidItemPrice"));
+
+            //brand new order
+            if (c == null) {
+                c = new Cart();
+
+                //set order number
+                c.setOrderNumber(orderNumber);
+                c.setOrderDate(c.getOrderDate());
+                c.setTotalAmount(c.getTotalAmount());
+
+                //add the item.
+                //we are adding items by reference. (item sku)
+                //store sku only. We'll pull the product name and other details from the DB when we list the cart items.
+                c.addItem(orderNumber, sku, itemName, price);
+            } //existing order.
+            //increment qty by 1 if same sku
+            //add a new item, if there is no match to sku
+            else {
+                c.addItem(orderNumber, sku, itemName, price);
             }
+
+            if (customer != null) //if customer is logged in. Grab the email id into the cart/order.
+            {
+                c.setCustomerEmail(customer.getEmail());
+            }
+
+            //update session with the updated object 
+            dispatcherWrapper(session, request, response, c, "/cart.jsp");
+
         }
-        
-        if (lItem == null) {
-            lItem = new LineItem(it, 0);
+
+        if (request.getParameter("hidAction").equals("update")) {
+
+            int quantity = Integer.parseInt(request.getParameter("txtQuantity"));
+            c.updateItem(sku, quantity);
+
+            String url;
+            if (c.getItems().isEmpty())//cart is empty take the custoemr to the index page
+            {
+                url = "/IndexServlet";
+            } else {
+                url = "/cart.jsp";
+            }
+
+            dispatcherWrapper(session, request, response, c, url);
+
         }
-            
-        c.addItem(lItem);
-        session.setAttribute("cart", c);
-        
-        String url = "/cart.jsp";
-        
-        RequestDispatcher dispatcher =
-             getServletContext().getRequestDispatcher(url);
+
+    }
+
+    public void dispatcherWrapper(HttpSession session, HttpServletRequest request, HttpServletResponse response, Cart cart, String url)
+            throws ServletException, IOException {
+        //update session with the updated object 
+        session.setAttribute("cart", cart);
+
+        RequestDispatcher dispatcher
+                = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
 

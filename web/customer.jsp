@@ -13,10 +13,10 @@
         <script>
 
             function confirmDelete(form) {
-                if(confirm("Are you sure you want to delete this customer?"))
+                if (confirm("Are you sure you want to delete this customer?"))
                     form.submit();
             }
-            
+
             function validate(form) {
                 var isValid = true;
 
@@ -67,7 +67,7 @@
         <div class ="background">
             <div class="container">
 
-                <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+                <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
 
 
                     <div class="content">
@@ -186,6 +186,14 @@
                         </c:if>
 
                         ${requestScope.msg}
+
+                        <br>order info:<br>
+
+                        <c:if test="${customer != null}">
+                            <c:forEach var="Cart" items="${requestScope.order}">
+                                ${Cart.orderNumber} &nbsp; &nbsp; | &nbsp;&nbsp; ${Cart.orderDate} &nbsp; &nbsp; | &nbsp;&nbsp; ${Cart.totalAmount} <br>
+                            </c:forEach>
+                        </c:if>
 
                         <!-- end .content --></div>
                         <%@include file="/WEB-INF/jspf/footer.jspf" %>

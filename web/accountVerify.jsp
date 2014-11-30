@@ -1,5 +1,5 @@
-<%-- 
-    Document   : verify account
+<%--
+Document   : verify account
     Created on : Nov 10, 2014, 12:12:53 PM
     Author     : Ashley, Yonas, Phat
 --%>
@@ -15,9 +15,9 @@
     <body>
         <div class="background">
         <div class="container">
-          <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+          <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
           <div class="content">
-        
+                      
         <h1>Verify Account</h1>
             <form action="index.jsp" method="post">
                 <table border="0" align="Center">

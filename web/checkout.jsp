@@ -15,7 +15,6 @@
        
         <script>
             function isNumber(n) {
-                console.log("in number")
                 return !isNaN(parseFloat(n)) && isFinite(n);
             }
             
@@ -109,12 +108,12 @@
                 </td>
             </tr>
         </table>
-        <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+        <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
 
         <!-- end .header --></div>
         <div class="content">
             <h1>Checkout</h1>
-        
+            
             <p>Your total is: $${requestScope.cost}</p>
             
             <table border="1" align="center" cellpadding="20" cellspacing="0">
@@ -122,15 +121,22 @@
                     <c:forEach var="itm" items="${sessionScope.cart.items}">
                     <tr>
                         <td>${itm.item.itemName}</td>
-                        <td>Price: $${(itm.item.discount / 100) * itm.item.price}</td>
+                        <%--<td>Price: $${(itm.item.discount / 100) * itm.item.price}</td>--%>
+                        <td>Price: $${itm.item.price}</td>
                         <td>Quantity: ${itm.quantity}</td>
                     </tr>
                     </c:forEach>
                 </tbody>
             </table>
             
-            <br><p>Enter payment information:</p>
+            <p>Enter payment information:</p>
          
+            First name: ${sessionScope.customer.firstName}<br>
+            Last name: ${sessionScope.customer.lastName}<br><br>
+            Order number: ${sessionScope.cart.orderNumber}<br>
+            Order date: ${sessionScope.cart.orderDate}<br>
+            Order amount: ${sessionScope.cart.totalAmount}<br>
+            
             <form action="PaymentServlet" method="post">
                 <table>
                     <tbody>
@@ -159,7 +165,7 @@
                 </table>
                 <input type="button" value="Place Order" onclick="validate(this.form)"/>
             </form>
-        
+            
         <!-- end .content --></div>
         
         <!-- end .container --></div>
@@ -168,3 +174,5 @@
     <!-- end background --></div>
     </body>
 </html>
+            
+            

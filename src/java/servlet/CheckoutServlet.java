@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import customer.Customer;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,38 +24,38 @@ import javax.servlet.RequestDispatcher;
  */
 @WebServlet(name = "CheckoutServlet", urlPatterns = {"/CheckoutServlet"})
 public class CheckoutServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       //Database stand-in
-       HttpSession session = request.getSession();
-       Cart c = (Cart) session.getAttribute("cart");
-        
-        ArrayList<LineItem> items = c.getItems();
-        
-        double sum = 0;
-        for (LineItem i: items) {
-            double price = i.getItem().getPrice() * (i.getItem().getDiscount() / 100);
-            sum += price * i.getQuantity();
+
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+        Cart c = (Cart) session.getAttribute("cart");
+
+        if (customer == null) {//customer is not logged in
+            request.setAttribute("msg", "Please login or register to proceed to checkout.");
+            session.setAttribute("bringToCheckoutPage", "true"); //we'll use this attribute to bring the customer back to the checkout page
+
+            RequestDispatcher dispatcher
+                    = getServletContext().getRequestDispatcher("/IndexServlet");
+            dispatcher.forward(request, response);
         }
+        else
+        {
+            ArrayList<LineItem> items = c.getItems();
         
-        request.setAttribute("cost", sum);
+            double sum = 0;
+            for (LineItem i: items) {
+                double price = i.getPrice() /** (i.getItem().getDiscount() / 100)*/;
+                sum += price * i.getQuantity();
+            }
         
-        String url = "/checkout.jsp";
+            request.setAttribute("cost", sum);    
         
-        RequestDispatcher dispatcher =
-             getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+            RequestDispatcher dispatcher
+                    = getServletContext().getRequestDispatcher("/checkout.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

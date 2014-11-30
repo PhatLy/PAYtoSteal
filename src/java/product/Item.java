@@ -5,52 +5,41 @@
  */
 package product;
 
-import dbutil.ConnectionPool;
 import java.io.Serializable;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
  * @author Ashley, Yonas, Phat
  */
 public class Item implements Serializable {
-
-    //yonas: added sku, price (changed it to double)
-    //discount, date, start, and end times.
-    private String sku;
+    private int sku;
     private String imgSrc;
     private String itemName;
     private double price;
     private String description;
     private double discount;
-    private Date discountCurrentTime;
     private Date discountStartTime;
     private Date discountEndTime;
 
     public Item() {
-        sku = "";
+        sku = 0;
         imgSrc = "images/noItem.png";
         itemName = "";
         price = 0;
         description = "";
         discount = 0;
-        discountCurrentTime = new java.util.Date();
-        discountStartTime = null;
-        discountEndTime = null;
+        discountStartTime = new Date();
+        discountEndTime = new Date();
     }
 
-    public Item(String sku, String imgSrc, String itemName, double price, String description, double discount, Date discountStartTime, Date discountEndTime) {
+    public Item(int sku, String imgSrc, String itemName, double price, String description, double discount, Date discountStartTime, Date discountEndTime) {
         this.sku = sku;
         this.imgSrc = imgSrc;
         this.itemName = itemName;
         this.price = price;
         this.description = description;
         this.discount = discount;
-        this.discountCurrentTime = new java.util.Date();
         this.discountStartTime = discountStartTime;
         this.discountEndTime = discountEndTime;
     }
@@ -87,11 +76,11 @@ public class Item implements Serializable {
         description = desc;
     }
 
-    public String getSku() {
+    public int getSku() {
         return sku;
     }
 
-    public void setSku(String sku) {
+    public void setSku(int sku) {
         this.sku = sku;
     }
 
@@ -101,10 +90,6 @@ public class Item implements Serializable {
 
     public void setDiscount(double discount) {
         this.discount = discount;
-    }
-
-    public Date getDiscountCurrentTime() {
-        return discountCurrentTime;
     }
 
     public Date getDiscountStartTime() {

@@ -5,13 +5,19 @@
  */
 package servlet;
 
+import customer.Customer;
+import dbutil.Order;
 import java.io.IOException;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import product.Cart;
+import product.LineItem;
 
 /**
  *
@@ -31,11 +37,39 @@ public class PaymentServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/orderConfirm.jsp";
+        //prepare data to insert into the db.
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+        Cart cart = (Cart) session.getAttribute("cart");
         
-        RequestDispatcher dispatcher =
-             getServletContext().getRequestDispatcher(url);
-        dispatcher.forward(request, response);    
+        cart.setCustomerEmail(customer.getEmail());
+        
+        String nameOnCard = request.getParameter("name");
+        String cardNumber = request.getParameter("num");
+        String securityCode = request.getParameter("code");
+        
+        String orderNumber = cart.getOrderNumber();
+        String customerEmail = cart.getCustomerEmail();
+        Date orderDate = cart.getOrderDate();
+        double orderAmount = cart.getTotalAmount();
+        
+        Order order = new Order();
+        
+        order.addOrder(orderNumber, customerEmail, orderDate, orderAmount, nameOnCard, cardNumber, securityCode);
+        
+        //now let's iterate through cart item and push them over to the order items table.
+        for(LineItem l : cart.getItems()){
+            order.addOrderItems(orderNumber, l.getItemSku(), l.getItemName(), l.getPrice(), l.getQuantity());
+        }
+        
+        //send confirmation email
+        
+        //kill all sessions
+        session.invalidate();
+        
+        RequestDispatcher dispatcher
+                    = getServletContext().getRequestDispatcher("/orderConfirm.jsp");
+            dispatcher.forward(request, response);  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

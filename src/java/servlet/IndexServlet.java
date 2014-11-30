@@ -30,11 +30,11 @@ public class IndexServlet extends HttpServlet {
         
         //add items to display in the home page to the request object.
         request.setAttribute("items", items);
-
+        System.out.println(items.size());
+        
         RequestDispatcher dispatcher
                 = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
-
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
