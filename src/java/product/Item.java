@@ -6,6 +6,7 @@
 package product;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -112,6 +113,14 @@ public class Item implements Serializable {
     }
 
     public boolean isIsExpiredDiscount() {
+        
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+        Date today = new Date();
+        
+        long diff = today.getTime() - discountEndTime.getTime();
+        
+        this.isExpiredDiscount = diff <=0 ? true : false;
+        
         return isExpiredDiscount;
     }
 
