@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,92 +13,83 @@
         <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
         <title>Shopping Cart</title>
     </head>
-    
-    <body>
-        <div class="container">
-            <table width="100" border="0" align="right">
-            <tr>
-              <td>Account</td>
-              <td><form name="form1" method="post" action="">
-                <input type="text" name="acctName" id="acctName">
-              </form></td>
-            </tr>
-            <tr>
-              <td>Password</td>
-              <td><form name="form2" method="post" action="">
-                <input type="text" name="password" id="password">
-              </form></td>
-            </tr>
-        </table>
-        <div class="header"><a href="index.jsp"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
 
-           <!-- end .header --></div>
+    <body>
+        <div class="background">
+            <div class="container">
+                <table width="150" border="0" align="right">
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <form name="form1" method="post" action="">  
+                                <table> 
+                                    <tr>
+                                        <td>Account</td>
+                                        <td>
+                                            <input type="text" name="acctName" id="acctName">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Password</td>
+                                        <td><input type="text" name="password" id="password"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type='button' value="Login" onclick="validateLogin(this.form)"/>
+                                        </td>
+                                        <td>
+                                            <a href="createAccount.jsp"> Create Account</a>
+                                        </td>
+                                    </tr>
+                                </table>  
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+
+        <!-- end .header --></div>
         <div class="content">
-            <% 
-            String firstItem = request.getParameter("item1");
-            firstItem = firstItem == null ? "0" : firstItem;
-            
-            String secondItem = request.getParameter("item2");
-            secondItem = secondItem == null ? "0" : secondItem;
-            
-            String thirdItem = request.getParameter("item3");
-            thirdItem = thirdItem == null ? "0" : thirdItem;
-        %>
+
         <h1>Your Cart</h1>
-        <form action="checkout.jsp" method="post">
+        
+        <%--table border 0 align center put for loop in one column--%>
+        <c:forEach var="LineItem" items="${sessionScope.cart.items}">
+        <form action="CartServlet" method="post">
             <table border="1" align="center" cellpadding="20" cellspacing="0">
                 <tbody>
                     <tr>
-                        <% if (!(firstItem.equals("0"))) { %>
-                            <td><image src="images/iphone.jpg" width="75" height= "75"></td>
-                            <td class="label">Textbook</td>
-                            <td class='label'>Price: $<%= request.getParameter("price1")%> <input type='hidden' value='<%= request.getParameter("price1")%>' name='price1'/></td>
-                            <td class="label">Quantity:<input type="text" value=<%= firstItem %> name="item1" autocomplete="off"/></td>
-                        <%}
-                        else { %>
-                            <input type="hidden" value="0" name="item1"/>
-                            <input type="hidden" value="0" name="price1"/>
-                        <%}%>
-                    </tr>
-                    <tr>
-                        <% if (!(secondItem.equals("0"))) { %>
-                            <td><image src="images/textbook.jpg" width="75" height= "75"></td>
-                            <td class="label">Textbook</td>
-                            <td class='label'>Price: $<%= request.getParameter("price2")%> <input type='hidden' value='<%= request.getParameter("price2")%>' name='price2'/></td>
-                            <td class="label">Quantity:<input type="text" value=<%= secondItem %> name="item2" autocomplete="off"/></td>
-                        <%}
-                        else { %>
-                            <input type="hidden" value="0" name="item2"/>
-                            <input type="hidden" value="0" name="price2"/>
-                        <%}%>
-                    </tr>
-                    <tr>
-                        <% if (!(thirdItem.equals("0"))) { %>
-                            <td><image src="images/fan.jpg" width="75" height="75"></td>
-                            <td class="label">Desk Fan</td>
-                            <td class='label'>Price: $<%= request.getParameter("price3")%> <input type='hidden' value='<%= request.getParameter("price3")%>' name='price3'/></td>
-                            <td class="label">Quantity:<input type="text" value=<%= thirdItem %> name="item3" autocomplete="off"></td>
-                        <%}
-                        else { %>
-                            <input type="hidden" value="0" name="item3"/>
-                            <input type="hidden" value="0" name="price3"/>
-                        <%}%>
+                        <%--<td><image src="images/${LineItem.imgSrc}" width="75" height="75"></td>--%>
+                        <td width="300px">${LineItem.itemName}</td>
+                        <td width="100px">Price: $${LineItem.price}</td>
+                        <%--<td>Price: $${(requestScope.item.discount / 100) * requestScope.item.price}</td>--%>
+                        <td width="100px">Quantity: <input type="text" name="txtQuantity" value="${LineItem.quantity}" style="width: 30px;"/></td>
+                        <input type="hidden" name="hidAction" value="update" />
+                        <input type="hidden" name="hidSku" value="${LineItem.itemSku}" />
+                        <td><input type="submit" name="btnUpdate" value="Update"/> </td>
                     </tr>
                 </tbody>
             </table>
-            <br><input type="submit" value="Checkout"/>
         </form>
-        <form action="index.jsp" method="post">
-            <tr>
-                <td><br><input type="button" value="Continue Shopping" onclick="form.submit()"/></td>
-            </tr>
+        </c:forEach>
+        
+        <p>Set quantity to 0 to remove item from cart.</p>
+
+
+        <%-- yonas: to facilitate the submission for bthUpdate, i've moved btnCheckout into a separate form
+        we'll get the cart details from the session variable.--%>
+        <form action="CheckoutServlet" method="post">
+            <input type="submit" name="btnCheckout" value="Checkout"/>
+        </form>
+
+        <form action="IndexServlet" method="post">
+            <input type="submit" value="Continue Shopping"/>
         </form>
         <!-- end .content --></div>
-        <div class="footer">
-            <p>&nbsp;</p>
-        <!-- end .footer --></div>
-        <!-- end .container --></div>
 
-        
+        <!-- end .container --></div>
+        <%@include file="/WEB-INF/jspf/footer.jspf" %>
+        <!-- end background --></div>
     </body>
 </html>
