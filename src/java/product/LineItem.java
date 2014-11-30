@@ -11,18 +11,25 @@ import java.io.Serializable;
  *
  * @author Ashley, Phat, Yonas
  */
-public class LineItem implements Serializable{
+public class LineItem implements Serializable {
+
     private String orderNumber;
     private int itemSku;
     private String itemName;
+    private String itemImgUrl;
+    private double discount;
     private double price;
+    private double discountedPrice;
     private int quantity;
 
     public LineItem() {
         orderNumber = "";
         itemSku = 0;
         itemName = "";
+        itemImgUrl = "";
+        discount = 0;
         price = 0;
+        discountedPrice = 0;
         quantity = 0;
     }
 
@@ -50,12 +57,37 @@ public class LineItem implements Serializable{
         this.itemName = itemName;
     }
 
+    public String getItemImgUrl() {
+        return itemImgUrl;
+    }
+
+    public void setItemImgUrl(String itemImgUrl) {
+        this.itemImgUrl = itemImgUrl;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getDiscountedPrice() {
+        this.discountedPrice = (price - (price * (discount / 100)));
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(double discountedPrice) {
+        this.discountedPrice = discountedPrice;
     }
 
     public int getQuantity() {
