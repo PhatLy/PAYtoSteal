@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="background">
-        <jsp:include page="WEB-INF/jspf/timerScript.jsp" /><%--move this to each item in product --%>
+        <%--<jsp:include page="WEB-INF/jspf/timerScript.jsp" /><%--move this to each item in product --%>
         <div class="container">
             <table width="150" border="0" align="right">
                 <tr>
