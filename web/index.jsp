@@ -15,7 +15,7 @@
         <script src="includes/countdown.js" type="text/javascript"></script>
         <title>Welcome!</title>
     </head>
-        <body>
+    <body>
         <div class="background">
             <div class="container">
                 <table width="150" border="0" align="right">
@@ -69,7 +69,7 @@
                 </table>
                 <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
                 </div>
-                
+
                 <div class="content">
 
                     <script>;
@@ -77,54 +77,62 @@
                          https://blog.smalldo.gs/2013/12/create-simple-countdown/
                          */
                         function startCountdown(placeHolder, year, month, day, hour, minute) {
-                            month = month-1; //appears month starts at current month + 1. Need to reset it back.
+
+                            // alert("y:" + year + " M:" + month + " d:" + day + " h:" + hour + " m:" + minute);
+
+                            month = month - 1; //appears month starts at current month + 1. Need to reset it back.
                             var clock = document.getElementById(placeHolder)
-                                    , targetDate = new Date(year, month, day, hour, minute, 00, 000); // Jan 1, 2050;
+                                    , targetDate = new Date(year, month, day, hour, minute, 00, 000);
 
                             //new Date(year, month, day, hours, minutes, seconds, milliseconds)
 
-                            clock.innerHTML = countdown(targetDate).toString();
+                            clock.innerHTML = 'Discount expires in: ' + countdown(targetDate).toString();
                             setInterval(function () {
-                                clock.innerHTML = countdown(targetDate).toString();
+                                clock.innerHTML = 'Discount expires in: ' +  countdown(targetDate).toString();
                             }, 1000);
                         }
                     </script>
-                    
+
                     <c:forEach var="item" items="${requestScope.items}">
-                    <form action="CartServlet" method="post">
-                        <table border="1" align="center" cellpadding="20" cellspacing="0">
-                            <tbody>   
-                                <tr>
-                                    <td wdith="100px"><image src="images/${item.imgSrc}" width="75" height="75"></td>
-                                    <td width="150px"><a href='ProdPgServlet?itmSku=${item.sku}'</a>${item.itemName}</td>
-                                    <%--<td width="75px">Price: $${(item.discount / 100) * item.price}</td>--%>
-                                    <td>Price: $${item.price}</td>
-                                    <td><%--Unique placeholder id for each item. ignore the
-                                            bad value for the div below. --%>
-                                        <div id="${item.sku}"></div>
-                                        <script>
-                                            startCountdown("${item.sku}",
-                                            <fmt:formatDate value="${item.discountEndTime}" pattern="yyy" />
-                                            , <fmt:formatDate value="${item.discountEndTime}" pattern="M" />
-                                            , <fmt:formatDate value="${item.discountEndTime}" pattern="d" />
-                                            , <fmt:formatDate value="${item.discountEndTime}" pattern="h" />
-                                            , <fmt:formatDate value="${item.discountEndTime}" pattern="m" />);
-                                        </script>
-                                    </td>
-                                    <input type="hidden" name="hidSku" value="${item.sku}"/>
-                                    <input type="hidden" name="hidItemName" value="${item.itemName}"/>
-                                    <input type="hidden" name="hidItemPrice" value="${item.price}"/>
-                                    <input type="hidden" name="hidAction" value="add"/>
-                                    <td><input type="submit"  value="Add to cart"/></td>
+                        <form action="CartServlet" method="post">
+
+                            <table border="1" align="center" cellpadding="10" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="2" style="width:80px;"><image src="images/${item.imgSrc}" width="75" height="75"></td>
+                                        <td style="width:550px; text-align:left;" colspan="2"><a href='ProdPgServlet?itmSku=${item.sku}'</a>${item.itemName}</a><input type="hidden" name="hidSku" value="${item.sku}"/><input type="hidden" name="hidItemName" value="${item.itemName}"/><input type="hidden" name="hidItemPrice" value="${item.price}"/><input type="hidden" name="hidAction" value="add"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:left;">
+                                <strike>Price: <fmt:formatNumber type="currency" value="${item.price}"/></strike><br>
+                                Discount: <fmt:formatNumber type="percent" value="${item.discount/100}"/><br>
+                                Discounted price: <fmt:formatNumber type="currency" value="${item.price - (item.price * (item.discount/100))}"/><br>
+
+                                <%--Unique placeholder id for each item. ignore the
+                                    bad value warning for the div below. --%>
+                                <div id="lblCountdown${item.sku}"></div>
+                                <script>
+                                                startCountdown('${"lblCountdown"}${item.sku}',
+                                    <fmt:formatDate value="${item.discountEndTime}" pattern="yyy" />
+                                                , <fmt:formatDate value="${item.discountEndTime}" pattern="M" />
+                                                , <fmt:formatDate value="${item.discountEndTime}" pattern="d" />
+                                                , <fmt:formatDate value="${item.discountEndTime}" pattern="h" />
+                                                , <fmt:formatDate value="${item.discountEndTime}" pattern="m" />);
+                                </script>
+
+                                </td>
+                                <td style="width:80px; vertical-align:bottom;">
+                                    <input type="submit"  value="Add to cart"/></td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </form>
+                                </tbody>
+                            </table>
+
+                        </form>
                     </c:forEach>
-                    
-        <!-- end .content --></div>
-        <%@include file="/WEB-INF/jspf/footer.jspf" %>
-        <!-- end .container --></div>
-        <!-- end background --></div>      
+
+                    <!-- end .content --></div>
+                    <%@include file="/WEB-INF/jspf/footer.jspf" %>
+                <!-- end .container --></div>
+            <!-- end background --></div>      
     </body>
 </html>
