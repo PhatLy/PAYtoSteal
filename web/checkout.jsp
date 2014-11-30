@@ -122,7 +122,7 @@
                     <c:forEach var="itm" items="${sessionScope.cart.items}">
                     <tr>
                         <td>${itm.item.itemName}</td>
-                        <td>Price: $${itm.item.price}</td>
+                        <td>Price: $${(itm.item.discount / 100) * itm.item.price}</td>
                         <td>Quantity: ${itm.quantity}</td>
                     </tr>
                     </c:forEach>

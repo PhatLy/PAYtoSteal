@@ -44,7 +44,7 @@ public class CheckoutServlet extends HttpServlet {
         
         double sum = 0;
         for (LineItem i: items) {
-            double price = i.getItem().getPrice();
+            double price = i.getItem().getPrice() * (i.getItem().getDiscount() / 100);
             sum += price * i.getQuantity();
         }
         

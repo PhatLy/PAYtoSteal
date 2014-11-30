@@ -61,7 +61,7 @@
                     <tr>
                         <td><image src="images/${itm.item.imgSrc}" width="75" height="75"></td>
                         <td>${itm.item.itemName}</td>
-                        <td>Price: $${itm.item.price}</td>
+                        <td>Price: $${(requestScope.item.discount / 100) * requestScope.item.price}</td>
                         <td>Quantity: ${itm.quantity}</td>
                     </tr>
                     </c:forEach>

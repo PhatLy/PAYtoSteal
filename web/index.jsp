@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="background">
-        <jsp:include page="WEB-INF/jspf/timerScript.jsp" /><%--move this to each item in product --%>
+        <%--<jsp:include page="WEB-INF/jspf/timerScript.jsp" /><%--move this to each item in product --%>
         <div class="container">
             <table width="150" border="0" align="right">
                 <tr>
@@ -64,7 +64,7 @@
                         <tr>
                             <td wdith="100px"><image src="images/${item.imgSrc}" width="75" height="75"></td>
                             <td width="150px"><a href='ProdPgServlet?itmSku=${item.sku}'</a>${item.itemName}</td>
-                            <td width="75px">Price: $${item.price}</td>
+                            <td width="75px">Price: $${(item.discount / 100) * item.price}</td>
                             <input type="hidden" name="itmSku" value='${item.sku}'/>
                             <td><input type="submit" value="Add to cart"/></td>
                         </tr>

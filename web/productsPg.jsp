@@ -41,8 +41,15 @@
                 <tbody>
                     <tr>
                         <td rowspan="3"><image src="images/${requestScope.item.imgSrc}" width="200" height="200"></td>
-                        <td>Price: $${requestScope.item.price}</td>
+                        <td>Price: <s>$${requestScope.item.price}</s></td>
                     </tr>
+                    <tr>
+                        <td>Discount: ${requestScope.item.discount}%</td>
+                    </tr>
+                    <tr>
+                        <td>Discounted Price: $${(requestScope.item.discount / 100) * requestScope.item.price}</td>
+                    </tr>
+                    <tr></tr>
                     <tr>
                         <td>Description:</td>
                     </tr>
@@ -52,7 +59,7 @@
                     </tr>
                 </tbody>
             </table>
-            <input type="submit" value="Add to Cart"/>
+            <br><input type="submit" value="Add to Cart"/>
         </form>
                     
         <!-- end .content --></div>
