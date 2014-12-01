@@ -310,8 +310,7 @@ public class DBUtil {
         return items;
     }
 
-    public Item getItem(String skuS) {
-        int sku = Integer.parseInt(skuS);
+    public Item getItem(int sku) {
         ResultSet rs = null;
         Item it = null;
 
@@ -319,9 +318,10 @@ public class DBUtil {
         try {
             ConnectionPool cp = new ConnectionPool();
 
-            String query = "Select * from item where sku = '" + sku + "'";
+            String query = "Select * from item where sku = ? ";
 
             PreparedStatement stmt = cp.connection.prepareStatement(query);
+            stmt.setInt(1, sku);
             rs = stmt.executeQuery();
 
             if (rs.next()) {

@@ -114,7 +114,7 @@
         <div class="content">
             <h1>Checkout</h1>
             
-            <p>Your total is: $${requestScope.cost}</p>
+            <p>Your total is: $${requestScope.cost}</p> <!--use sessionScope.cart.totalAmount instead?-->
             
             <table border="1" align="center" cellpadding="20" cellspacing="0">
                 <tbody>

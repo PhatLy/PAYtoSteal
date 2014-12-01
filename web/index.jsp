@@ -102,10 +102,6 @@
                                         <td rowspan="2" style="width:80px;"><image src="images/${item.imgSrc}" width="75" height="75"></td>
                                         <td style="width:550px; text-align:left;" colspan="2"><a href="ProdPgServlet?itmSku=${item.sku}"</a>${item.itemName}</a>
                                             <input type="hidden" name="hidSku" value="${item.sku}"/>
-                                            <input type="hidden" name="hidItemName" value="${item.itemName}"/>
-                                            <input type="hidden" name="hidItemPrice" value="${item.price}"/>
-                                            <input type="hidden" name="hidItemDiscount" value="${item.discount}"/>
-                                            <input type="hidden" name="hidItemDiscountedPrice" value="${item.discountedPrice}"/>
                                             <input type="hidden" name="hidAction" value="add"/></td>
                                     </tr>
                                     <tr>

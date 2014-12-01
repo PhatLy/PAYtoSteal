@@ -56,7 +56,7 @@ public class Cart {
 
     public double getTotalAmount() {
         for (LineItem l : items) {
-            totalAmount += l.getDiscountedPrice(); //calculate discounted price (not base price)
+            totalAmount += l.getDiscountedPrice() * l.getQuantity(); //calculate discounted price (not base price)
         }
         return totalAmount;
     }
@@ -104,7 +104,7 @@ public class Cart {
         return items.size();
     }
     
-    public void addItem(String orderNumber, int sku, String itemName, double price, double discount, double discountedPrice) {
+    public void addItem(String orderNumber, int sku, String itemName, String itemImgSrc, double price, double discount, double discountedPrice) {
 
         boolean found = false;
 
@@ -126,6 +126,7 @@ public class Cart {
             l.setItemSku(sku);
             l.setOrderNumber(orderNumber);
             l.setItemName(itemName);
+            l.setItemImgUrl(itemImgSrc);
             l.setPrice(price);
             l.setDiscount(discount);
             l.setDiscountedPrice(discountedPrice);
