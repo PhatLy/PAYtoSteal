@@ -77,41 +77,12 @@
     <body>
     <div class="background">
         <div class="container">
-            <table width="150" border="0" align="right">
-                <tr>
-                    <td>
-                      <p><a href="./cart.jsp"><img src="images/cart.png" alt="cart" width="40" height="40" longdesc="cart" align="right"></a></p>
-                    </td>
-                    <td>
-                        <form name="form1" method="post" action="">  
-                        <table> 
-                            <tr>
-                              <td>Account</td>
-                              <td>
-                                <input type="text" name="acctName" id="acctName">
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Password</td>
-                              <td><input type="text" name="password" id="password"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type='button' value="Login" onclick="validateLogin(this.form)"/>
-                                </td>
-                                <td>
-                                    <a href="createAccount.jsp"> Create Account</a>
-                                </td>
-                            </tr>
-                    </table>  
-                    </form>
-                </td>
-            </tr>
-        </table>
-        <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+         <div class="background">
+            <div class="container">
 
-        <!-- end .header --></div>
-        <div class="content">
+                <%@include file="includes/header.jsp" %>
+
+                <div class="content">
             <h1>Checkout</h1>
             
             <p>Your total is: $${requestScope.cost}</p> <!--use sessionScope.cart.totalAmount instead?-->
@@ -166,11 +137,10 @@
                 <input type="button" value="Place Order" onclick="validate(this.form)"/>
             </form>
             
-        <!-- end .content --></div>
-        
-        <!-- end .container --></div>
-         <%@include file="includes/footer.jsp" %>
-    <!-- end background --></div>
+   <!-- end .content --></div>
+                    <%@include file="includes/footer.jsp" %>
+                <!-- end .container --></div>
+            <!-- end background --></div> 
     </body>
 </html>
             

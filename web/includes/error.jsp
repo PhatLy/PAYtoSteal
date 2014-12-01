@@ -12,10 +12,23 @@
         <title>Error</title>
     </head>
     <body>
-        <h1>Aw aw aw, snap:)</h1>
-        Our dedicated engineers are working on resolving this issue.
-        
-        Error message:<br>
-        ${requestScope['javax.servlet.error.message']}
+
+        <div class="background">
+            <div class="container">
+
+                <%@include file="includes/header.jsp" %>
+
+                <div class="content">
+                    <h1>Aw aw aw, snap:)</h1>
+                    Our dedicated engineers are working on resolving this issue.
+
+                    Error message:<br>
+                    ${requestScope['javax.servlet.error.message']}
+
+                    <!-- end .content --></div>
+                    <%@include file="includes/footer.jsp" %>
+                <!-- end .container --></div>
+            <!-- end background --></div> 
+
     </body>
 </html>
