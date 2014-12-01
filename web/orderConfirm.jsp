@@ -23,6 +23,11 @@
             
         <h1>Your order has been placed!</h1>
         <p>Thank you for shopping with us!</p>
+        <div class='theEnd'>
+            <h1>Now Leave</h1>
+            <img src="images/noThief.gif" name="thEnd" width="342" />
+            
+        </div>
         
    <!-- end .content --></div>
                     <%@include file="includes/footer.jsp" %>
