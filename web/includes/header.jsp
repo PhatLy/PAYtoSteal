@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="styles/animate.css" rel="stylesheet" type="text/css"/>
+
 
 <table border="0" align="right">
     <tr>
@@ -68,6 +70,6 @@
     </tr>
 </table>
 
-<div class="header"><a href="IndexServlet">
+<div class="animated lightSpeedIn"><a href="IndexServlet">
         <img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
 </div>
