@@ -55,11 +55,12 @@ public class PaymentServlet extends HttpServlet {
         
         Order order = new Order();
         
+        //copy order info into the databse
         order.addOrder(orderNumber, customerEmail, orderDate, orderAmount, nameOnCard, cardNumber, securityCode);
         
         //now let's iterate through cart item and push them over to the order items table.
         for(LineItem l : cart.getItems()){
-            order.addOrderItems(orderNumber, l.getItemSku(), l.getItemName(), l.getPrice(), l.getQuantity());
+            order.addOrderItems(orderNumber, l.getItemSku(), l.getItemName(), l.getDiscountedPrice() , l.getQuantity());
         }
         
         //send confirmation email

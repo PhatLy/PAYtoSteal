@@ -21,6 +21,7 @@ import product.Item;
  */
 @WebServlet(name = "ProdPgServlet", urlPatterns = {"/ProdPgServlet"})
 public class ProdPgServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,7 +33,7 @@ public class ProdPgServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String prod = request.getParameter("itmSku");
+        int prod = Integer.parseInt(request.getParameter("itmSku"));
         DBUtil db = new DBUtil();
         Item it = db.getItem(prod);
 
@@ -40,8 +41,7 @@ public class ProdPgServlet extends HttpServlet {
         if (it == null) {
             url = "/IndexServlet";
             //set error message, should never hapen?
-        }
-        else {
+        } else {
             url = "/productsPg.jsp";
             request.setAttribute("item", it);
         }

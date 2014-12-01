@@ -6,6 +6,7 @@
 package product;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -13,14 +14,17 @@ import java.util.Date;
  * @author Ashley, Yonas, Phat
  */
 public class Item implements Serializable {
+
     private int sku;
     private String imgSrc;
     private String itemName;
     private double price;
     private String description;
     private double discount;
+    private double discountedPrice;
     private Date discountStartTime;
     private Date discountEndTime;
+    private boolean isExpiredDiscount;
 
     public Item() {
         sku = 0;
@@ -33,48 +37,7 @@ public class Item implements Serializable {
         discountEndTime = new Date();
     }
 
-    public Item(int sku, String imgSrc, String itemName, double price, String description, double discount, Date discountStartTime, Date discountEndTime) {
-        this.sku = sku;
-        this.imgSrc = imgSrc;
-        this.itemName = itemName;
-        this.price = price;
-        this.description = description;
-        this.discount = discount;
-        this.discountStartTime = discountStartTime;
-        this.discountEndTime = discountEndTime;
-    }
 
-    public String getImgSrc() {
-        return imgSrc;
-    }
-
-    public void setImgSrc(String src) {
-        imgSrc = src;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String nme) {
-        itemName = nme;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double amt) {
-        price = amt;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String desc) {
-        description = desc;
-    }
 
     public int getSku() {
         return sku;
@@ -84,12 +47,53 @@ public class Item implements Serializable {
         this.sku = sku;
     }
 
+    public String getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public double getDiscount() {
         return discount;
     }
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    public double getDiscountedPrice() {
+        this.discountedPrice = (price - (price * (discount / 100)));
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(double discountedPrice) {
+        this.discountedPrice = discountedPrice;
     }
 
     public Date getDiscountStartTime() {
@@ -107,4 +111,21 @@ public class Item implements Serializable {
     public void setDiscountEndTime(Date discountEndTime) {
         this.discountEndTime = discountEndTime;
     }
+
+    public boolean isIsExpiredDiscount() {
+        
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
+        Date today = new Date();
+        
+        long diff = today.getTime() - discountEndTime.getTime();
+        
+        this.isExpiredDiscount = diff <=0 ? true : false;
+        
+        return isExpiredDiscount;
+    }
+
+    public void setIsExpiredDiscount(boolean isExpiredDiscount) {
+        this.isExpiredDiscount = isExpiredDiscount;
+    }
+
 }

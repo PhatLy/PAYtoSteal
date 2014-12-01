@@ -6,6 +6,7 @@
 package servlet;
 
 import customer.Customer;
+import dbutil.DBUtil;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +23,7 @@ import product.*;
  */
 @WebServlet(name = "CartServlet", urlPatterns = {"/CartServlet"})
 public class CartServlet extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -36,8 +37,15 @@ public class CartServlet extends HttpServlet {
 
         if (request.getParameter("hidAction").equals("add")) {
 
-            String itemName = request.getParameter("hidItemName");
-            double price = Double.parseDouble(request.getParameter("hidItemPrice"));
+            //pull item details from the db.
+            DBUtil util = new DBUtil();
+            Item it = util.getItem(sku);
+                    
+            String itemName = it.getItemName(); 
+            String itemImageSrc = it.getImgSrc() ;
+            double price = it.getPrice();
+            double discount = it.getDiscount();
+            double discountedPrice = it.getDiscountedPrice();
 
             //brand new order
             if (c == null) {
@@ -46,17 +54,18 @@ public class CartServlet extends HttpServlet {
                 //set order number
                 c.setOrderNumber(orderNumber);
                 c.setOrderDate(c.getOrderDate());
-                c.setTotalAmount(c.getTotalAmount());
 
                 //add the item.
                 //we are adding items by reference. (item sku)
                 //store sku only. We'll pull the product name and other details from the DB when we list the cart items.
-                c.addItem(orderNumber, sku, itemName, price);
+                c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
+
+
             } //existing order.
             //increment qty by 1 if same sku
             //add a new item, if there is no match to sku
             else {
-                c.addItem(orderNumber, sku, itemName, price);
+                c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
             }
 
             if (customer != null) //if customer is logged in. Grab the email id into the cart/order.
