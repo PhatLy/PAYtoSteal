@@ -14,26 +14,11 @@
     </head>
     <body>
         <div class="background">
-        <div class="container">
-        <table width="100" border="0" align="right">
-            <tr>
-              <td>Account</td>
-              <td><form name="form1" method="post" action="">
-                <input type="text" name="acctName" id="acctName">
-              </form></td>
-            </tr>
-            <tr>
-              <td>Password</td>
-              <td><form name="form2" method="post" action="">
-                <input type="text" name="password" id="password">
-              </form></td>
-            </tr>
-        </table>
+            <div class="container">
 
-        <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
-        <!-- end .header --></div> 
-        
-        <div class="content">
+                <%@include file="includes/header.jsp" %>
+
+                <div class="content">
         
         <h1>${requestScope.item.itemName}</h1>
         <form action="CartServlet" method="post">
@@ -65,10 +50,9 @@
             <br><input type="submit" value="Add to Cart"/>
         </form>
                     
-        <!-- end .content --></div>
-        
-        <!-- end .container --></div>
-        <%@include file="/WEB-INF/jspf/footer.jspf" %>
-    <!-- end background --></div>            
+           <!-- end .content --></div>
+                    <%@include file="includes/footer.jsp" %>
+                <!-- end .container --></div>
+            <!-- end background --></div>            
     </body>
 </html>
