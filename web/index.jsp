@@ -63,7 +63,7 @@
 
                                 <%--Unique placeholder id for each item. ignore the
                                     bad value warning for the div below. --%>
-                                <div id="lblCountdown${item.sku}"></div>
+                                <div id="lblCountdown${item.sku}"></div> 
                                 <script>
                                     startCountdown('${"lblCountdown"}${item.sku}',
                                     <fmt:formatDate value="${item.discountEndTime}" pattern="yyy" />
