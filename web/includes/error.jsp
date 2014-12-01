@@ -14,7 +14,7 @@
     <body>
 
         <div style="width:500px; margin:0 auto;">
-            <img src="../images/bkgd_steal.jpg" alt=""/>
+            <img src="images/bkgd_steal.jpg" alt=""/>
             <br>
             <h1>Aw aw aw, snap:)</h1>
             Our dedicated engineers are working on resolving this issue.
