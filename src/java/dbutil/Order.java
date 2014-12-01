@@ -49,7 +49,7 @@ public class Order {
         return rowsAffected;
     }
 
-    public int addOrderItems(String orderNumber, int itemSku, String itemName, double price, int quantity) {
+    public int addOrderItems(String orderNumber, int itemSku, String itemName, double discountedPrice, int quantity) {
         int rowsAffected = 0;
 
         try {
@@ -62,7 +62,7 @@ public class Order {
             stmt.setString(1, orderNumber);
             stmt.setInt(2, itemSku);
             stmt.setString(3, itemName);
-            stmt.setDouble(4, price);
+            stmt.setDouble(4, discountedPrice);
             stmt.setInt(5, quantity);
 
             rowsAffected = stmt.executeUpdate();

@@ -62,7 +62,7 @@
                     <tr>
                         <%--<td><image src="images/${LineItem.imgSrc}" width="75" height="75"></td>--%>
                         <td width="300px">${LineItem.itemName}</td>
-                        <td width="100px">Price: $${LineItem.price}</td>
+                        <td width="100px">Price: $${LineItem.discountedPrice}</td>
                         <%--<td>Price: $${(requestScope.item.discount / 100) * requestScope.item.price}</td>--%>
                         <td width="100px">Quantity: <input type="text" name="txtQuantity" value="${LineItem.quantity}" style="width: 30px;"/></td>
                         <input type="hidden" name="hidAction" value="update" />

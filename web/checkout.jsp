@@ -118,12 +118,12 @@
             
             <table border="1" align="center" cellpadding="20" cellspacing="0">
                 <tbody>
-                    <c:forEach var="itm" items="${sessionScope.cart.items}">
+                    <c:forEach var="LineItem" items="${sessionScope.cart.items}">
                     <tr>
-                        <td>${itm.item.itemName}</td>
-                        <%--<td>Price: $${(itm.item.discount / 100) * itm.item.price}</td>--%>
-                        <td>Price: $${itm.item.price}</td>
-                        <td>Quantity: ${itm.quantity}</td>
+                        <td>${LineItem.itemName}</td>
+                        <td>Price: $${LineItem.price}</td>
+                        <td>Discounted Price: $${LineItem.discountedPrice}</td>
+                        <td>Quantity: ${LineItem.quantity}</td>
                     </tr>
                     </c:forEach>
                 </tbody>
@@ -169,8 +169,7 @@
         <!-- end .content --></div>
         
         <!-- end .container --></div>
-         <%@include file="../includes/footer.jsp" %>
-
+         <%@include file="includes/footer.jsp" %>
     <!-- end background --></div>
     </body>
 </html>

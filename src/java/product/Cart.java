@@ -104,7 +104,7 @@ public class Cart {
         return items.size();
     }
     
-    public void addItem(String orderNumber, int sku, String itemName, double price) {
+    public void addItem(String orderNumber, int sku, String itemName, double price, double discount, double discountedPrice) {
 
         boolean found = false;
 
@@ -127,6 +127,8 @@ public class Cart {
             l.setOrderNumber(orderNumber);
             l.setItemName(itemName);
             l.setPrice(price);
+            l.setDiscount(discount);
+            l.setDiscountedPrice(discountedPrice);
             l.setQuantity(1);
 
             items.add(l);
