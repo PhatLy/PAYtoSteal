@@ -23,7 +23,7 @@ public class IndexServlet extends HttpServlet {
         String url = "/index.jsp";
 
         DBUtil db = new DBUtil();
-        int maxItemsToList = 5; //get this # from the web.xml file?
+        int maxItemsToList = 4; //get this # from the web.xml file?
         
         List<Item> items = new ArrayList<Item>();
         items = db.listItems(maxItemsToList);
