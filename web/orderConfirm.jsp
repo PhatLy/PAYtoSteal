@@ -12,8 +12,7 @@
         <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
         <title>Order Confirm</title>
     </head>
-    <body>
-        <div class="background">
+    <body class="background">
         <div class="container">
 
         <div class="header"><a href="IndexServlet"><img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
@@ -32,6 +31,5 @@
    <!-- end .content --></div>
                     <%@include file="includes/footer.jsp" %>
                 <!-- end .container --></div>
-            <!-- end background --></div> 
     </body>
 </html>

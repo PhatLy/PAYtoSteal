@@ -63,8 +63,7 @@
             }
         </script>
     </head>
-    <body>
-        <div class="background">
+    <body class="background">
             <div class="container">
 
                 <%@include file="includes/header.jsp" %>
@@ -211,6 +210,5 @@
                     <!-- end .content --></div>
                     <%@include file="includes/footer.jsp" %>
                 <!-- end .container --></div>
-            <!-- end background --></div> 
     </body>
 </html>

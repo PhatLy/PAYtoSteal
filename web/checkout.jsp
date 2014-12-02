@@ -74,8 +74,7 @@
             }
         </script>
     </head>
-    <body>
-    <div class="background">
+    <body class="background">
         <div class="container">
          <div class="background">
             <div class="container">
@@ -141,7 +140,6 @@
                     <%@include file="includes/footer.jsp" %>
                 <!-- end .container --></div>
             <!-- end background --></div> 
-    </body>
 </html>
             
             
