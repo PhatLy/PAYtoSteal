@@ -41,36 +41,47 @@ public class PaymentServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("customer");
         Cart cart = (Cart) session.getAttribute("cart");
-        
+
         cart.setCustomerEmail(customer.getEmail());
-        
+
         String nameOnCard = request.getParameter("name");
         String cardNumber = request.getParameter("num");
         String securityCode = request.getParameter("code");
-        
+
         String orderNumber = cart.getOrderNumber();
         String customerEmail = cart.getCustomerEmail();
         Date orderDate = cart.getOrderDate();
         double orderAmount = cart.getTotalAmount();
-        
+
         Order order = new Order();
-        
-        //copy order info into the databse
-        order.addOrder(orderNumber, customerEmail, orderDate, orderAmount, nameOnCard, cardNumber, securityCode);
-        
-        //now let's iterate through cart item and push them over to the order items table.
-        for(LineItem l : cart.getItems()){
-            order.addOrderItems(orderNumber, l.getItemSku(), l.getItemName(), l.getDiscountedPrice() , l.getQuantity());
-        }
-        
+
+        //check if order number exists
+        if (order.listOrderItems(orderNumber).isEmpty()) {
+
+            //copy order info into the databse
+            order.addOrder(orderNumber, customerEmail, orderDate, orderAmount, nameOnCard, cardNumber, securityCode);
+
+            //now let's iterate through cart item and push them over to the order items table.
+            for (LineItem l : cart.getItems()) {
+                order.addOrderItems(orderNumber, l.getItemSku(), l.getItemName(), l.getDiscountedPrice(), l.getQuantity());
+            }
+
         //send confirmation email
-        
-        //kill all sessions
-        session.invalidate();
-        
-        RequestDispatcher dispatcher
+            //kill all sessions
+            session.invalidate();
+
+            RequestDispatcher dispatcher
                     = getServletContext().getRequestDispatcher("/orderConfirm.jsp");
-            dispatcher.forward(request, response);  
+            dispatcher.forward(request, response);
+        } else {
+
+            request.setAttribute("msg", "Duplicate order number!");
+
+            RequestDispatcher dispatcher
+                    = getServletContext().getRequestDispatcher("/IndexServlet");
+            dispatcher.forward(request, response);
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

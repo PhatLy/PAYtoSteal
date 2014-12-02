@@ -31,9 +31,7 @@
                             <td>Password</td>
                             <td><input type="password" name="password" id="password">
                                 </br>
-                                <div class="error">
-                                    ${requestScope.msg}
-                                </div>
+
                             </td>
                         </tr>
                         <tr>
@@ -65,7 +63,9 @@
                     </tr>
                 </table>
             </c:if>
-
+            <div class="error">
+                ${requestScope.msg}
+            </div>
         </td>
     </tr>
 </table>
