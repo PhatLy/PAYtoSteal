@@ -47,7 +47,7 @@
                     <c:forEach var="item" items="${requestScope.items}">
                         <form action="CartServlet" method="post">
 
-                            <table border="1" align="center" cellpadding="10" cellspacing="0" class="animated shake">
+                            <table border="1" align="center" cellpadding="10" cellspacing="0" class="animated fadeInLeftBig">
                                 <tbody>
                                     <tr>
                                         <td rowspan="2" style="width:80px;"><image src="images/${item.imgSrc}" width="75" height="75"></td>
