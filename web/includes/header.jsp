@@ -70,6 +70,6 @@
     </tr>
 </table>
 
-<div class="animated lightSpeedIn"><a href="IndexServlet">
-        <img src="images/StoreLogo.png" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
+<div class="Header"><a href="IndexServlet">
+        <img src="images/StoreLogo.png" class="animated slideInRight" alt="Store Logo Here" name="Store_logo" width="342" height="123" id="Store_logo" style="background: #FFF; display:block;" /></a>
 </div>
