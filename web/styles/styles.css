@@ -70,3 +70,8 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	font-size: x-small;
 	
 }
+.timer{
+    font-style: bold;
+    color: red;
+}
+
