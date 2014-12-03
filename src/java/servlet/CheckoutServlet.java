@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import product.*;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 
 
@@ -40,22 +39,10 @@ public class CheckoutServlet extends HttpServlet {
                     = getServletContext().getRequestDispatcher("/IndexServlet");
             dispatcher.forward(request, response);
         }
-        else
-        {
-            ArrayList<LineItem> items = c.getItems();
-        
-            double sum = 0;
-            for (LineItem i: items) {
-                double price = i.getPrice() /** (i.getItem().getDiscount() / 100)*/;
-                sum += price * i.getQuantity();
-            }
-        
-            request.setAttribute("cost", sum);    
-        
-            RequestDispatcher dispatcher
-                    = getServletContext().getRequestDispatcher("/checkout.jsp");
-            dispatcher.forward(request, response);
-        }
+         
+        RequestDispatcher dispatcher
+                = getServletContext().getRequestDispatcher("/checkout.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

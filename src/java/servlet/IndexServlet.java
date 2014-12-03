@@ -1,6 +1,6 @@
 package servlet;
 
-import dbutil.DBUtil;
+import dbutil.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,8 @@ public class IndexServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String url = "/index.jsp";
-
-        DBUtil db = new DBUtil();
+        
+        DBUtil db = new DBUtil();        
         int maxItemsToList = 4; //get this # from the web.xml file?
         
         List<Item> items = new ArrayList<Item>();
@@ -30,7 +30,6 @@ public class IndexServlet extends HttpServlet {
         
         //add items to display in the home page to the request object.
         request.setAttribute("items", items);
-        System.out.println(items.size());
         
         RequestDispatcher dispatcher
                 = getServletContext().getRequestDispatcher(url);

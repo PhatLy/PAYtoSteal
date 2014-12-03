@@ -4,6 +4,7 @@
     Author     : Ashley, Yonas, Phat
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -198,7 +199,7 @@
                                 <tr>
                                     <td>${Cart.orderNumber} </td>
                                     <td>${Cart.orderDate}</td>
-                                    <td>${Cart.totalAmount}</td>
+                                    <td><fmt:formatNumber type="currency" value="${Cart.totalAmount}"/></td>
                                 </tr>
                             </c:forEach>
 
