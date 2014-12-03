@@ -15,7 +15,7 @@ import javax.mail.internet.*;
  */
 public class AppUtil {
 
-    public void sendEmail(String subject, String body, String from, String to) {
+    public String sendEmail(String subject, String body, String from, String to) {
         try {
             // 1 - get a mail session
             final String username = "pay2steal@halohello.com";
@@ -26,6 +26,7 @@ public class AppUtil {
             props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.host", "173.248.149.66");
             props.put("mail.smtp.port", "25");
+            //props.put("mail.smtp.connectiontimeout", 600000);
 
             Session session = Session.getInstance(props,
                     new javax.mail.Authenticator() {
@@ -47,8 +48,12 @@ public class AppUtil {
                     toAddress);
             // 4 - send the message
             Transport.send(message);
+            
+            return "";
+            
         } catch (MessagingException e) {
             e.printStackTrace();
+            return e.getMessage();
         }
     }
 

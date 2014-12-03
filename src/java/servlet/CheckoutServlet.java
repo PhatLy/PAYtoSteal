@@ -16,14 +16,13 @@ import javax.servlet.http.HttpSession;
 import product.*;
 import javax.servlet.RequestDispatcher;
 
-
 /**
  *
  * @author Ashley, Phat, Yonas
  */
 @WebServlet(name = "CheckoutServlet", urlPatterns = {"/CheckoutServlet"})
 public class CheckoutServlet extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -38,11 +37,13 @@ public class CheckoutServlet extends HttpServlet {
             RequestDispatcher dispatcher
                     = getServletContext().getRequestDispatcher("/IndexServlet");
             dispatcher.forward(request, response);
+        } else {
+
+            RequestDispatcher dispatcher
+                    = getServletContext().getRequestDispatcher("/checkout.jsp");
+            dispatcher.forward(request, response);
+
         }
-         
-        RequestDispatcher dispatcher
-                = getServletContext().getRequestDispatcher("/checkout.jsp");
-        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

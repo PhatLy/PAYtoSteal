@@ -22,6 +22,7 @@
             
         <h1>Your order has been placed!</h1>
         <p>Thank you for shopping with us!</p>
+        <p>${requestScope.emailConfirmation}</p>
         <div class='theEnd'>
             <h1>Now Leave</h1>
             <img src="images/noThief.gif" name="thEnd" width="342" />

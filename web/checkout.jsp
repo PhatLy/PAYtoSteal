@@ -105,7 +105,6 @@
             Last name: ${sessionScope.customer.lastName}<br><br>
             Order number: ${sessionScope.cart.orderNumber}<br>
             Order date: ${sessionScope.cart.orderDate}<br>
-            Order amount: ${sessionScope.cart.totalAmount}<br>
             
             <form action="PaymentServlet" method="post">
                 <table>
@@ -133,6 +132,7 @@
                         </tr>
                     </tbody>
                 </table>
+               
                 <input type="button" value="Place Order" onclick="validate(this.form)"/>
             </form>
             
@@ -140,6 +140,7 @@
                     <%@include file="includes/footer.jsp" %>
                 <!-- end .container --></div>
             <!-- end background --></div> 
+        </div>
 </html>
             
             

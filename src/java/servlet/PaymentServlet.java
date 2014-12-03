@@ -67,14 +67,20 @@ public class PaymentServlet extends HttpServlet {
                 order.addOrderItems(orderNumber, l.getItemSku(), l.getItemName(), l.getDiscountedPrice(), l.getQuantity());
             }
 
-        //send confirmation email
+            //send confirmation email
             AppUtil util = new AppUtil();
             String messageBody = customer.getFirstName() + ", thank you for your order!\n"
                     + "Your order is being processed and will ship soon!\n"
                     + "\nPay2Steal Team";
             //pay2steal@halohello.com
-            util.sendEmail("Pay2Steal! order: "+orderNumber+" Thank you!", messageBody, "ykidanemariam@horizon.csueastbay.edu", customerEmail);
-            
+
+            String emailConfirmation = util.sendEmail("Pay2Steal! order: " + orderNumber + " Thank you!", messageBody, "pay2steal@halohello.com", customerEmail);
+            if (emailConfirmation.isEmpty()) {
+                request.setAttribute("emailConfirmation", "An email is sent to you to confirm your order.");
+            } else {
+                //request.setAttribute("emailConfirmation", emailConfirmation);
+            }
+
             //kill all sessions
             session.invalidate();
 
