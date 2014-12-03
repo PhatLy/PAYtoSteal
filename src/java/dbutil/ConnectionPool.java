@@ -19,7 +19,7 @@ public class ConnectionPool {
     public ConnectionPool() {
         dbUrl = "jdbc:mysql://localhost:3306/pay2steal";
         username = "root";
-        password = "dbadmin";
+        password = "";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");

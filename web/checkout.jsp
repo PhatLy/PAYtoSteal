@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -84,15 +85,14 @@
                 <div class="content">
             <h1>Checkout</h1>
             
-            <p>Your total is: $${requestScope.cost}</p> <!--use sessionScope.cart.totalAmount instead?-->
+            <p>Your total is: <fmt:formatNumber type="currency" value="${sessionScope.cart.totalAmount}"/></p>
             
             <table border="1" align="center" cellpadding="20" cellspacing="0">
                 <tbody>
                     <c:forEach var="LineItem" items="${sessionScope.cart.items}">
                     <tr>
                         <td>${LineItem.itemName}</td>
-                        <td>Price: $${LineItem.price}</td>
-                        <td>Discounted Price: $${LineItem.discountedPrice}</td>
+                        <td>Discounted price: <fmt:formatNumber type="currency" value="${LineItem.discountedPrice}"/></td>
                         <td>Quantity: ${LineItem.quantity}</td>
                     </tr>
                     </c:forEach>

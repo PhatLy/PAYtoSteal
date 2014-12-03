@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,14 +25,16 @@
             <table>
                 <tbody>
                     <tr>
-                        <td rowspan="3"><image src="images/${requestScope.item.imgSrc}" width="200" height="200"></td>
-                        <td>Price: <s>$${requestScope.item.price}</s></td>
+                        <td><image src="images/${requestScope.item.imgSrc}" width="200" height="200"></td>
                     </tr>
                     <tr>
-                        <td>Discount: ${requestScope.item.discount}%</td>
+                        <td>Price: <s><fmt:formatNumber type="currency" value="${requestScope.item.price}"/></s></td>
                     </tr>
                     <tr>
-                        <td>Discounted Price: $${(requestScope.item.discount / 100) * requestScope.item.price}</td>
+                        <td> Discount: <fmt:formatNumber type="percent" value="${requestScope.item.discount/100}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Discounted price: <fmt:formatNumber type="currency" value="${requestScope.item.discountedPrice}"/></td>
                     </tr>
                     <tr></tr>
                     <tr>

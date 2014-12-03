@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,10 +30,8 @@
                             <table border="1" align="center" cellpadding="20" cellspacing="0">
                                 <tbody>
                                     <tr>
-                                        <%--<td><image src="images/${LineItem.imgSrc}" width="75" height="75"></td>--%>
                                         <td width="300px">${LineItem.itemName}</td>
-                                        <td width="100px">Price: $${LineItem.discountedPrice}</td>
-                                        <%--<td>Price: $${(requestScope.item.discount / 100) * requestScope.item.price}</td>--%>
+                                        <td width="100px">Discounted price: <fmt:formatNumber type="currency" value="${LineItem.discountedPrice}"/></td>
                                         <td width="100px">Quantity: <input type="text" name="txtQuantity" value="${LineItem.quantity}" style="width: 30px;"/></td>
                                 <input type="hidden" name="hidAction" value="update" />
                                 <input type="hidden" name="hidSku" value="${LineItem.itemSku}" />
