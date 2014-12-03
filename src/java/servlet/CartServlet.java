@@ -33,9 +33,11 @@ public class CartServlet extends HttpServlet {
         //Order number is the first 6 letters of the session id
         String orderNumber = session.getId().substring(0, 6);
         Customer customer = (Customer) session.getAttribute("customer");
-        int sku = Integer.parseInt(request.getParameter("hidSku"));
+        
+        int sku = request.getParameter("hidSku") == null ? 0 : Integer.parseInt(request.getParameter("hidSku"));
+        String action = request.getParameter("hidAction") == null ? "" : request.getParameter("hidAction");
 
-        if (request.getParameter("hidAction").equals("add")) {
+        if (!action.isEmpty() && action.equals("add")) {
 
             //pull item details from the db.
             DBUtil util = new DBUtil();
@@ -75,9 +77,7 @@ public class CartServlet extends HttpServlet {
             //update session with the updated object 
             dispatcherWrapper(session, request, response, c, "/cart.jsp");
 
-        }
-
-        if (request.getParameter("hidAction").equals("update")) {
+        } else if (!action.isEmpty() && action.equals("update")) {
 
             int quantity = Integer.parseInt(request.getParameter("txtQuantity"));
             c.updateItem(sku, quantity);
@@ -92,22 +92,22 @@ public class CartServlet extends HttpServlet {
 
             dispatcherWrapper(session, request, response, c, url);
 
-        }
-
-        //if no parameter and if cart object has items, show cart.
-        if (c != null && c.getItems().size() > 0) {
-
-            String url = "/cart.jsp";
-
-            dispatcherWrapper(session, request, response, c, url);
         } else {
+            //if no parameter and if cart object has items, show cart.
+            if (c != null && c.getItems().size() > 0) {
 
-            String url = "/IndexServlet";
+                String url = "/cart.jsp";
 
-            request.setAttribute("msg", "Cart is empty!");
+                dispatcherWrapper(session, request, response, c, url);
+            } else {
 
-            dispatcherWrapper(session, request, response, c, url);
+                String url = "/IndexServlet";
 
+                request.setAttribute("msg", "Cart is empty!");
+
+                dispatcherWrapper(session, request, response, c, url);
+
+            }
         }
 
     }
