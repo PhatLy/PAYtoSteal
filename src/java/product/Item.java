@@ -117,7 +117,7 @@ public class Item implements Serializable {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy hh:mm a");
         Date today = new Date();
         
-        long diff = today.getTime() - discountEndTime.getTime();
+        long diff = discountEndTime.getTime() - today.getTime();
         
         this.isExpiredDiscount = diff <=0 ? true : false;
         

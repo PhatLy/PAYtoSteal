@@ -33,16 +33,18 @@ public class CartServlet extends HttpServlet {
         //Order number is the first 6 letters of the session id
         String orderNumber = session.getId().substring(0, 6);
         Customer customer = (Customer) session.getAttribute("customer");
-        int sku = Integer.parseInt(request.getParameter("hidSku"));
 
-        if (request.getParameter("hidAction").equals("add")) {
+        int sku = request.getParameter("hidSku") == null ? 0 : Integer.parseInt(request.getParameter("hidSku"));
+        String action = request.getParameter("hidAction") == null ? "" : request.getParameter("hidAction");
+
+        if (!action.isEmpty() && action.equals("add")) {
 
             //pull item details from the db.
             DBUtil util = new DBUtil();
             Item it = util.getItem(sku);
-                    
-            String itemName = it.getItemName(); 
-            String itemImageSrc = it.getImgSrc() ;
+
+            String itemName = it.getItemName();
+            String itemImageSrc = it.getImgSrc();
             double price = it.getPrice();
             double discount = it.getDiscount();
             double discountedPrice = it.getDiscountedPrice();
@@ -58,14 +60,21 @@ public class CartServlet extends HttpServlet {
                 //add the item.
                 //we are adding items by reference. (item sku)
                 //store sku only. We'll pull the product name and other details from the DB when we list the cart items.
-                c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
-
+                if (!it.isIsExpiredDiscount()) {
+                    c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
+                } else {
+                    request.setAttribute("msg", "Can't add item to cart. Discount has expired");
+                }
 
             } //existing order.
             //increment qty by 1 if same sku
             //add a new item, if there is no match to sku
             else {
-                c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
+                if (!it.isIsExpiredDiscount()) {
+                    c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
+                } else {
+                    request.setAttribute("msg", "Can't add item to cart. Discount has expired");
+                }
             }
 
             if (customer != null) //if customer is logged in. Grab the email id into the cart/order.
@@ -76,9 +85,7 @@ public class CartServlet extends HttpServlet {
             //update session with the updated object 
             dispatcherWrapper(session, request, response, c, "/cart.jsp");
 
-        }
-
-        if (request.getParameter("hidAction").equals("update")) {
+        } else if (!action.isEmpty() && action.equals("update")) {
 
             int quantity = Integer.parseInt(request.getParameter("txtQuantity"));
             c.updateItem(sku, quantity);
@@ -93,6 +100,22 @@ public class CartServlet extends HttpServlet {
 
             dispatcherWrapper(session, request, response, c, url);
 
+        } else {
+            //if no parameter and if cart object has items, show cart.
+            if (c != null && c.getItems().size() > 0) {
+
+                String url = "/cart.jsp";
+
+                dispatcherWrapper(session, request, response, c, url);
+            } else {
+
+                String url = "/IndexServlet";
+
+                request.setAttribute("msg", "Cart is empty!");
+
+                dispatcherWrapper(session, request, response, c, url);
+
+            }
         }
 
     }

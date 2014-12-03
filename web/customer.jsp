@@ -188,9 +188,7 @@
                     ${requestScope.msg}
 
 
-                    <c:if test="${customer != null}">
-                        <br>order info:<br>
-
+                    <c:if test="${not empty customer.email}">
                         <table cellpadding="4">
                             <tr>
                                 <td>Order number </td>

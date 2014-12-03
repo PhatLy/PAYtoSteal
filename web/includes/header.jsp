@@ -14,7 +14,7 @@
                         item
                     </c:if>
                     <br>
-                    <a href="./cart.jsp"><img src="images/cart.png" alt="cart" width="40" height="40" longdesc="cart" align="right"></a></p>
+                    <a href="CartServlet"><img src="images/cart.png" alt="cart" width="40" height="40" longdesc="cart" align="right"></a></p>
                     </c:if>
         </td>
         <td>
