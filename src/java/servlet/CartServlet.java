@@ -40,9 +40,9 @@ public class CartServlet extends HttpServlet {
             //pull item details from the db.
             DBUtil util = new DBUtil();
             Item it = util.getItem(sku);
-                    
-            String itemName = it.getItemName(); 
-            String itemImageSrc = it.getImgSrc() ;
+
+            String itemName = it.getItemName();
+            String itemImageSrc = it.getImgSrc();
             double price = it.getPrice();
             double discount = it.getDiscount();
             double discountedPrice = it.getDiscountedPrice();
@@ -59,7 +59,6 @@ public class CartServlet extends HttpServlet {
                 //we are adding items by reference. (item sku)
                 //store sku only. We'll pull the product name and other details from the DB when we list the cart items.
                 c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
-
 
             } //existing order.
             //increment qty by 1 if same sku
@@ -90,6 +89,22 @@ public class CartServlet extends HttpServlet {
             } else {
                 url = "/cart.jsp";
             }
+
+            dispatcherWrapper(session, request, response, c, url);
+
+        }
+
+        //if no parameter and if cart object has items, show cart.
+        if (c != null && c.getItems().size() > 0) {
+
+            String url = "/cart.jsp";
+
+            dispatcherWrapper(session, request, response, c, url);
+        } else {
+
+            String url = "/IndexServlet";
+
+            request.setAttribute("msg", "Cart is empty!");
 
             dispatcherWrapper(session, request, response, c, url);
 
