@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import apputil.AppUtil;
 import customer.Customer;
 import dbutil.Order;
 import java.io.IOException;
@@ -67,6 +68,13 @@ public class PaymentServlet extends HttpServlet {
             }
 
         //send confirmation email
+            AppUtil util = new AppUtil();
+            String messageBody = customer.getFirstName() + ", thank you for your order!\n"
+                    + "Your order is being processed and will ship soon!\n"
+                    + "\nPay2Steal Team";
+            //pay2steal@halohello.com
+            util.sendEmail("Pay2Steal! order: "+orderNumber+" Thank you!", messageBody, "ykidanemariam@horizon.csueastbay.edu", customerEmail);
+            
             //kill all sessions
             session.invalidate();
 
