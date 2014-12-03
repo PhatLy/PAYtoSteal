@@ -33,7 +33,7 @@ public class CartServlet extends HttpServlet {
         //Order number is the first 6 letters of the session id
         String orderNumber = session.getId().substring(0, 6);
         Customer customer = (Customer) session.getAttribute("customer");
-        
+
         int sku = request.getParameter("hidSku") == null ? 0 : Integer.parseInt(request.getParameter("hidSku"));
         String action = request.getParameter("hidAction") == null ? "" : request.getParameter("hidAction");
 
@@ -60,13 +60,21 @@ public class CartServlet extends HttpServlet {
                 //add the item.
                 //we are adding items by reference. (item sku)
                 //store sku only. We'll pull the product name and other details from the DB when we list the cart items.
-                c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
+                if (!it.isIsExpiredDiscount()) {
+                    c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
+                } else {
+                    request.setAttribute("msg", "Can't add item to cart. Discount has expired");
+                }
 
             } //existing order.
             //increment qty by 1 if same sku
             //add a new item, if there is no match to sku
             else {
-                c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
+                if (!it.isIsExpiredDiscount()) {
+                    c.addItem(orderNumber, sku, itemName, itemImageSrc, price, discount, discountedPrice);
+                } else {
+                    request.setAttribute("msg", "Can't add item to cart. Discount has expired");
+                }
             }
 
             if (customer != null) //if customer is logged in. Grab the email id into the cart/order.
